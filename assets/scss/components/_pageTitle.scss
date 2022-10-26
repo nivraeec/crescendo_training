@@ -1,9 +1,22 @@
 .pageTitle {
+    background: url("../img/header.png");
+    background-size: cover;
     padding: 10px;
     text-align: center;
     min-width: 300px;
+    margin-bottom: 30px;
+    border-bottom: 8px solid $bluish-green;
 
     &__text {
         font-size: 5rem;
+        color: $bluish-green;
+    }
+
+    &__subtext {
+        min-height: 120px;
+        width: 35%;
+        padding: 20px 0;
+        margin: auto;
+        font-size: 1.6rem;
     }
 }
