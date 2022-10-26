@@ -1,10 +1,10 @@
 .pageTitle {
     background: url("../img/header.png");
     background-size: cover;
-    padding: 10px;
+    padding: 100px 10px 10px;
     text-align: center;
     min-width: 300px;
-    margin-bottom: 30px;
+    margin: 0 0 30px 0;
     border-bottom: 8px solid $bluish-green;
 
     &__text {

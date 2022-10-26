@@ -1,16 +1,18 @@
 .gallery {
+    width: 80%;
+    margin: auto;
     padding: 10px;
 
     &__list {
         display: flex;
         flex-wrap: wrap;
         list-style: none;
+        justify-content: space-between;
     }
 
     &__item {
         position: relative;
         width: 24%;
-        margin-right: 10px;
         margin-bottom: 10px;
         transition: all ease-in-out 1s;
         opacity: 0;
@@ -73,6 +75,14 @@
         transition: all ease-in-out 0.5s;
     }
 
+    &__detail {
+        width: 100%;
+        font-size: 1.2rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     &__social {
         position: absolute;
         top: -15px;
@@ -82,7 +92,7 @@
 
     &__socialImg {
         background: $white;
-        border: 3px solid $white;
+        border: 2px solid $white;
         width: 35px;
         height: 35px;
         border-radius: 100%;
