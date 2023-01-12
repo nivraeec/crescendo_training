@@ -1,0 +1,23 @@
+.pageLayout {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+
+    &__left {
+        background-image: url("/assets/img/pexels-inga-seliverstova-3394310.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 65%;
+        transition: 3s;
+    }
+
+    &__right {
+        padding: 30px 40px;
+        width: 35%;
+        overflow-y: scroll;
+    }
+}

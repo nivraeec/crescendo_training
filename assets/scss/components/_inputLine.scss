@@ -1,0 +1,79 @@
+.inputLine {
+
+    & label {
+        font-size: 1.25rem;
+        font-weight: 400;
+    }
+
+    & input {
+        margin: 5px 0 20px;
+        padding: 10px 0;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid $rose-gold;
+        font-size: 2rem;
+        font-weight: 300;
+        outline: 0;
+        color: #505050;
+        border-radius: 2.5px;
+        transition: .5s;
+    }
+
+    & input:focus {
+        transform: scale(1.05);
+    }
+
+    & input::placeholder {
+        color: #c5c5c5;
+    }
+
+    & select {
+        margin: 5px 0 20px;
+        padding: 10px 0;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid $rose-gold;
+        font-size: 2rem;
+        font-weight: 300;
+        outline: 0;
+        color: #505050;
+        border-radius: 2.5px;
+        transition: .5s;
+    }
+
+    & select:focus {
+        transform: scale(1.05);
+    }
+
+    & button {
+        outline: 0;
+        border: 1px solid $rose-gold;
+        font-size: 1.5rem;
+        padding: 10px 30px 11px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: .5s;
+    }
+
+    & button:hover {
+        transform: scale(1.1);
+    }
+
+    & p.error {
+        margin: -10px 0 15px;
+        color: red;
+        font-weight: 500;
+    }
+
+    &__submit {
+        background-color: $rose-gold;
+        color: #fff;
+        margin-right: 5px;
+    }
+
+    &__signIn {
+        background-color: #fff;
+        color: $rose-gold;
+        float: right;
+    }
+}
