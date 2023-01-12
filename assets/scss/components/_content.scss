@@ -3,6 +3,14 @@
     font-size: 2rem;
     text-align: center;
     margin:  70px auto;
+    line-height: 30px;;
+
+    &--background {
+        min-height: 200px;
+        width: 100%;
+        background: url("../img/vector.jpg") no-repeat fixed;
+        background-size: cover;
+    }
 
     &__title {
         position: relative;
@@ -21,6 +29,30 @@
             transform: translateX(-50%);
             width: 70px;
             border-bottom: 2px solid $dark-color;
+        }
+    }
+    
+    &__quotation {
+        display: flex;
+        width: 80%;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+
+    &__quote {
+        font-family: $header-font;
+        color: $white;
+        font-size: 4rem;
+        width: 30%;
+        line-height: 50px;
+
+        div {
+            text-align: right;
+            margin-top: 30px;
+            font-family: $primary-font;
+            font-size: 2rem;
+            color:  rgba(255, 255, 255, 0.7);
         }
     }
 }

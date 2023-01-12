@@ -71,22 +71,21 @@ function showSocial(el, event = "add", intervalNum = 300) {
 
 function galleryTemplate() {
     let temp = "";
-
-    galleryData.forEach((item, key) => {
+    galleryData.forEach(({ img, title, detail }, key) => {
         temp += `<li class="gallery__item">
             <div class="gallery__imgEnlarge" data-key="${key}">
                 <img src="assets/img/enlarge.png" alt="Enlarge">
             </div>
             <div class="gallery__imgContainer">
-                <img src="${item.img}" class="gallery__img" alt="${item.title}">
+                <img src="${img}" class="gallery__img" alt="${title}">
                 <div class="gallery__imgDescription">
                     <div class="gallery__social">
                         <img src="assets/img/fb.png" class="gallery__socialImg">
                         <img src="assets/img/instagram.webp" class="gallery__socialImg">
                         <img src="assets/img/pinterest.png" class="gallery__socialImg">
                     </div>
-                    <h2 class="gallery__imgTitle">${item.title}</h2>
-                    <div class="gallery__detail">${item.detail}</div>
+                    <h2 class="gallery__imgTitle">${title}</h2>
+                    <div class="gallery__detail">${detail}</div>
                 </div>
             </div>
         </li>`;
@@ -95,21 +94,21 @@ function galleryTemplate() {
     galleryList.innerHTML = temp;
 }
 
-function galleryModal(data) {
+function galleryModal({ img, title, detail }) {
     const overlay = document.createElement("DIV");
     overlay.classList.add("gallery__modalOverlay");
     const modal = document.createElement("DIV");
     modal.classList.add("gallery__modal");
     const modalImg = document.createElement("IMG");
     modalImg.classList.add("gallery__modalImg");
-    modalImg.src = data.img;
+    modalImg.src = img;
     const modalDetail = document.createElement("DIV");
     modalDetail.classList.add("gallery__modalDetail");
 
     const details = `
         <div>
-            <h2>${data.title}</h2>
-            <div>${data.detail}</div>
+            <h2>${title}</h2>
+            <div>${detail}</div>
         </div>
     `;
 

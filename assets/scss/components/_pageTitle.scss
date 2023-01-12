@@ -1,5 +1,5 @@
 .pageTitle {
-    background: url("../img/header.png");
+    background: url("../img/vector2.jpg") center;
     background-size: cover;
     padding: 100px 10px 10px;
     text-align: center;
@@ -9,14 +9,16 @@
 
     &__text {
         font-size: 5rem;
-        color: $bluish-green;
+        color: $white;
     }
 
     &__subtext {
-        min-height: 120px;
+        min-height: 160px;
         width: 35%;
         padding: 20px 0;
         margin: auto;
         font-size: 1.6rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 30px;    
     }
 }

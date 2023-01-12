@@ -52,6 +52,89 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </div>
 
+        <div class="content content--background">
+            <div class="content__quotation">
+                <div class="content__quote">
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    <div>- Lorem Ipsum</div>
+                </div>
+                <img src="assets/img/person.png">
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content__title">Register</div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <form class="form form--flex form--col2">
+                <div class="form__col">
+                    <div class="form__input">
+                        <label class="form__label"> Firstname </label>         
+                        <input type="text" name="firstname" placeholder="ex. Juan" required/>
+                    </div> 
+                    <div class="form__input">
+                        <label class="form__label"> Middlename: </label>     
+                        <input type="text" name="middlename" placeholder="ex. Dhi"/>
+                    </div> 
+                    <div class="form__input">
+                        <label class="form__label"> Lastname: </label>         
+                        <input type="text" name="lastname" placeholder="ex. Mahanap"/>
+                    </div> 
+                    
+                    <div class="form__input">
+                        <label class="form__label">Course :</label>   
+                        <select>  
+                        <option value="Course">Course</option>  
+                        <option value="BCA">BCA</option>  
+                        <option value="BBA">BBA</option>  
+                        <option value="B.Tech">B.Tech</option>  
+                        <option value="MBA">MBA</option>  
+                        <option value="MCA">MCA</option>  
+                        <option value="M.Tech">M.Tech</option>  
+                        </select>
+                    </div>
+
+                    <div class="form__input">
+                        <label class="form__label">Gender :</label> 
+                        <label class="form__radio"><input type="radio" value="male" name="gender"/> Male </label>
+                        <label class="form__radio"><input type="radio" value="female" name="gender"/> Female </label>
+                        <label class="form__radio"><input type="radio" value="other" name="gender"/> Other</label>
+                    </div> 
+                </div>
+
+                <div class="form__col">
+                    <div class="form__input">
+                        <label class="form__label">Phone :</label>
+                        <input type="text" name="phone" placeholder="ex. 09999999999"/>
+                    </div>  
+
+                    <div class="form__input">
+                        <label class="form__label">Address</label>
+                        <input type="text" id="address" name="address" placeholder="ex. Ilocos Sur, Philippines"/> 
+                    </div> 
+                    
+                    <div class="form__input">
+                        <label class="form__label">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="ex. name@email.com"/>   
+                    </div>
+
+                    <div class="form__input">
+                        <label class="form__label">Password: </label> 
+                        <input type="Password" id="pass" name="pass">   
+                    </div>
+
+                    <div class="form__input">
+                        <label class="form__label">Re-type password:  </label>
+                        <input type="Password" id="repass" name="repass"> 
+                    </div>
+                    <div class="form__buttons">
+                        <input type="reset" value="Reset" class="form__btn form__btn--reset">
+                        <button class="form__btn form__btn--reset">Clear All</button>
+                        <button class="form__btn form__btn--submit">Submit</button>
+                    </div>
+                </div>
+            </form>  
+        </div>
+
         <footer class="footer">
             <div class="footer__content">Footer part</div>
         </footer>
