@@ -1,0 +1,34 @@
+{
+  "name": "cresendo-training",
+  "version": "1.0.0",
+  "description": "A Cresendo JS Training",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Multiplayer",
+    "Game",
+    "Socket.IO"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Juriy/game-demo.git"
+  },
+  "author": "Juriy Bura <juriy.bura@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "consolidate": "^0.16.0",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "mustache": "^4.2.0",
+    "randomcolor": "^0.5.4",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
