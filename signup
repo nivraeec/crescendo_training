@@ -36,7 +36,7 @@
                         <option value="N/A">Rather not say</option>
                     </select>
                     <label for="address">Address</label>
-                    <input name="address" type="text" placeholder="Full Address" required>
+                    <textarea name="address" placeholder="Full Address" required id="" cols="30" rows="1"></textarea>
                     <label for="birthday">Birthday</label>
                     <input name="birthday" type="date" placeholder="Birthday" required>
                     <label for="userName">Username</label>

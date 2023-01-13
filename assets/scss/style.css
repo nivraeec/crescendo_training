@@ -372,7 +372,7 @@ body {
 .inputLine label {
   font-size: 1.25rem;
   font-weight: 400; }
-.inputLine input {
+.inputLine input, .inputLine textarea {
   margin: 5px 0 20px;
   padding: 10px 0;
   width: 100%;
@@ -384,9 +384,9 @@ body {
   color: #505050;
   border-radius: 2.5px;
   transition: .5s; }
-.inputLine input:focus {
+.inputLine input:focus, .inputLine textarea:focus {
   transform: scale(1.05); }
-.inputLine input::placeholder {
+.inputLine input::placeholder, .inputLine textarea::placeholder {
   color: #c5c5c5; }
 .inputLine select {
   margin: 5px 0 20px;

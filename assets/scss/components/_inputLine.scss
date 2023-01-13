@@ -5,7 +5,7 @@
         font-weight: 400;
     }
 
-    & input {
+    & input, & textarea {
         margin: 5px 0 20px;
         padding: 10px 0;
         width: 100%;
@@ -19,11 +19,11 @@
         transition: .5s;
     }
 
-    & input:focus {
+    & input:focus, & textarea:focus {
         transform: scale(1.05);
     }
 
-    & input::placeholder {
+    & input::placeholder, & textarea::placeholder {
         color: #c5c5c5;
     }
 
