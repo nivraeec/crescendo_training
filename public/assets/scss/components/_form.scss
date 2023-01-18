@@ -3,11 +3,26 @@ $secondary: #38ef7d;
 $white: #fff;
 $gray: #9b9b9b;
 
+$errorText: #ef3838;
+
+.f-hidden {
+  display: none;
+}
+
 .form__group {
   position: relative;
   padding: 15px 0 0;
   margin: 10px auto;
-  // width: 50%;
+  
+  input {
+    ~ .fas {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      bottom: 8px;
+    }
+  }
+  
 }
 
 .form__field {
@@ -31,6 +46,34 @@ $gray: #9b9b9b;
     cursor: text;
     top: 20px;
   }
+  
+  &:focus {
+    ~ .form__label {
+      position: absolute;
+      top: 0;
+      display: block;
+      transition: 0.2s;
+      font-size: 1rem;
+      color: $primary;
+      font-weight:700;    
+    }
+    padding-bottom: 6px;  
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, $primary,$secondary);
+    border-image-slice: 1;
+  }
+
+  &.error{
+    color: $errorText;
+    ~ .form__label {
+      color: $errorText;
+    }
+    &:focus {
+      border-image: linear-gradient(to right, #991111, #ef3838);
+      border-image-slice: 1;
+    }
+  }
 }
 
 .form__label {
@@ -42,34 +85,36 @@ $gray: #9b9b9b;
   color: $gray;
 }
 
-.form__field:focus {
-  ~ .form__label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 1rem;
-    color: $primary;
-    font-weight:700;    
-  }
-  padding-bottom: 6px;  
-  font-weight: 700;
-  border-width: 3px;
-  border-image: linear-gradient(to right, $primary,$secondary);
-  border-image-slice: 1;
-}
+
 /* reset input */
 .form__field{
   &:required,&:invalid { box-shadow:none; }
 }
-/* demo */
-// body {
-//   font-family: 'Poppins', sans-serif; 
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   min-height: 100vh;
-//   font-size: 1.5rem;
-//   background-color:#222222;
-// }
+
+.form__button {
+  background-color: #04AA6D;
+  color: #ffffff;
+  border-color: #04AA6D;
+  font-size: 18px;
+  font-family: 'Source Sans Pro', sans-serif;
+  padding: 8px 16px;
+  padding-left: 19px;
+  padding-right: 19px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: none;
+    background-color: #059862;
+  }
+
+  &[type="reset"] {
+    background-color: #f44336;
+
+    &:hover {
+      box-shadow: none;
+      background-color: #e24237;
+    }
+  }
+}

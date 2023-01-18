@@ -12,6 +12,7 @@
         <meta name="description" content=""/>
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="/assets/scss/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         <nav class="navigation">
@@ -64,22 +65,38 @@
                         </div>
                         <div class="form__group field">
                           <input type="text" class="form__field" placeholder="Middle Name" name="middlename" id='middlename' />
+                          
                           <label for="middlename" class="form__label">Middle Name</label>
                         </div>
                         <div class="form__group field">
                           <input type="text" class="form__field" placeholder="Last Name" name="lastname" id='lastname' />
                           <label for="lastname" class="form__label">Last Name</label>
                         </div>
+
+                        <div class="form__group field">
+                          <input type="tel" class="form__field" placeholder="Last Name" name="mobile" id='mobile' />
+                          <label for="mobile" class="form__label">Mobile no.</label>
+                        </div>
                       
                         <div class="form__group field">
                           <label class="form__label">Gender :</label> 
                           <label class="form__radio"><input type="radio" value="male" name="gender"/> Male </label>
                           <label class="form__radio"><input type="radio" value="female" name="gender"/> Female </label>
+                        </div>    
+                        
+                        <div class="form__group field">
+                          <label class="form__label">Birthdate :</label> 
+                          <input type="date" class="form__field" placeholder="Birthdate" name="birthdate" id='birthdate'/>
                         </div>
-    
+
+                        <div class="form__group field f-hidden">
+                          <label class="form__label">Age :</label> 
+                          <input type="text" readonly class="form__field" placeholder="Age" name="age" id='age' />
+                        </div>
+
                         <div class="form__group field">
                           <label class="form__label">Course :</label>   
-                          <select name="course">  
+                          <select name="course" class="form__field">  
                               <option value="">Select Course</option>  
                               <option value="BCA">BCA</option>  
                               <option value="BBA">BBA</option>  
@@ -88,7 +105,7 @@
                               <option value="MCA">MCA</option>  
                               <option value="M.Tech">M.Tech</option>  
                           </select>
-                      </div>
+                        </div>
                     </div>
   
                       
@@ -102,12 +119,14 @@
                           <label for="email" class="form__label">Email</label>
                         </div>
                         <div class="form__group field">
-                          <input type="password" class="form__field" placeholder="Password" name="password" id='password' />
+                          <input type="password" class="form__field" placeholder="Password" name="password" id='password' data-type="password"/>
+                          <i class="fas fa-eye-slash"></i>
                           <label for="password" class="form__label">Password</label>
                         </div>
     
                         <div class="form__group field">
-                          <input type="password" class="form__field" placeholder="Re-type Password" name="repassword" id='repassword' />
+                          <input type="password" class="form__field" placeholder="Re-type Password" name="repassword" id='repassword' data-type="password"/>
+                          <i class="fas fa-eye-slash"></i>
                           <label for="repassword" class="form__label">Re-type Password</label>
                         </div>
                       </div>
@@ -115,10 +134,8 @@
                     
 
                     <div class="form__group button">
-                      <input class="button" type="reset" value="Clear" />
-                    </div>
-                    <div class="form__group button">
-                      <input class="button" type="submit" value="Register" />
+                      <input class="form__button" type="reset" value="Clear" />                   
+                      <input class="form__button" type="submit" value="Register" />
                     </div>
                     
                   </form>
@@ -135,15 +152,7 @@
         </footer>
     </body>
     <style>
-      form .error.form__field {
-        /* border-bottom: 2px solid #ef3838; */
-        color: #ef3838;
-      }
-      .error.form__field:focus {
-        border-image: linear-gradient(to right, #991111, #ef3838);
-        border-image-slice: 1;
-        color: #ef3838;
-      }
+     
     </style>
     <script type="module" src="assets/js/form.js"></script>
 </html>

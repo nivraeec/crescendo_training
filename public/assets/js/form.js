@@ -1,4 +1,7 @@
 let registerForm = document.getElementById('registerForm')
+let inputs = document.querySelectorAll('input')
+
+let datefields = document.querySelectorAll('input[type="date"]')
 let textfields = document.querySelectorAll('input[type="text"]')
 let emailfields = document.querySelectorAll('input[type="email"]')
 let passwordfields = document.querySelectorAll('input[type="password"]')
@@ -76,71 +79,116 @@ function init(){
   }
 }
 
-const validate = {
-    textfield(text) {
-      var validRegex = /^[a-zA-Z\s]*$/;
-      return text.match(validRegex) ? true : false
-    },
-    emailfield(text) {
-      // var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-      var validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      return text.match(validRegex) ? true : false
-    },
-    passwordfield(text) {
-      var validRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-      return text.match(validRegex) ? true : false
-    },
-};
+function getDate() {
+  let today = new Date()
+  let dd = today.getDate()
+  let mm = today.getMonth()+1
+  let yyyy = today.getFullYear()
 
-const validation = {
-  textfield: function(){
-    textfields.forEach((elem, index) => {
-      
-      // elem.onchange = function(){
-      elem.onkeyup = function(){
-        let value = elem.value
-        if (validate.textfield(value)) {
-          elem.classList.remove('error')
-        } else {
-          elem.classList.add('error')
-        } 
-        console.log(value)
-      }
-    })
-  },
-  emailfield: function() {
-    emailfields.forEach((elem, index) => {
-      elem.onkeyup = function(){
-        let value = elem.value
-        if (validate.emailfield(value)) {
-          elem.classList.remove('error')
-        } else {
-          elem.classList.add('error')
-        } 
-        console.log(value)
-      }
-    })
-  }, 
-  passwordfield: function() {
-    passwordfields.forEach((elem, index) => {
-      elem.onkeyup = function() {
-        let value = elem.value
-        if(validate.passwordfield(value)) {
-          elem.classList.remove('error')
-        } else {
-          elem.classList.add('error')
-        } 
-      }
-    })    
-  }
-  
+  return date = yyyy + '-' + mm + '-' + dd;
 }
 
-// export default {
-//   ...validation
-// }
+function maxrange(limit='today') {
+  let today = new Date()
+  let dd = today.getDate()
+  let mm = today.getMonth()+1
+  let yyyy = today.getFullYear()
 
-validation.textfield()
-validation.emailfield()
-validation.passwordfield()
+  if( limit === 'must18'){
+    yyyy -= 18
+  }
+
+  if(dd < 10) { dd = '0' + dd}
+  if(mm < 10) { mm = '0' + mm}
+
+  let date = yyyy + '-' + mm + '-' + dd;
+
+  let agefield = document.querySelector('input[name="age"]')
+
+  datefields.forEach((elem, index) => {
+    elem.onclick = function() {
+      this.showPicker();
+    }
+    elem.onkeyup = function(e) {
+      return e.preventDefault();
+    }
+    elem.onchange = function() {      
+      let getyear = (elem.value).split('-')
+      agefield.value = today.getFullYear() - getyear[0]
+      console.log( agefield.value)
+    }
+    elem.setAttribute('max', date)
+  })
+
+  function validates() {
+
+  }
+}
+
+function validates(field, text) {
+  let validRegex = ''
+  switch(field){
+    case 'text':
+      validRegex = /^[a-zA-Z\s]*$/
+      break;
+    case 'email':
+      validRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+      break;
+    case 'password':
+      validRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+      // Test@123
+      // At least one upper case English letter, (?=.*?[A-Z])
+      // At least one lower case English letter, (?=.*?[a-z])
+      // At least one digit, (?=.*?[0-9])
+      // At least one special character, (?=.*?[#?!@$%^&*-])
+      // passwordfields.forEach((elem, index) => {
+      //   // console.log(elem.value)
+      //   console.log(elem[0])
+      // })
+      break;
+    case 'tel':
+      validRegex = /^(?:\+?\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{4})$/
+      break;
+    default:
+      validRegex = text
+      break
+  }
+  // console.log(`${field} ${text}`, text.match(validRegex))
+  return text.match(validRegex) ? true : false
+}
+
+function validations() {
+  inputs.forEach((elem, index) => {
+    elem.onkeyup = function() {
+      let value = elem.value
+      
+      // check if they have attr data-type
+      // if(elem.getAttribute('data-type')) 
+      // console.log(elem.getAttribute('data-type'))
+
+      if( validates(elem.type, value) ) {
+        elem.classList.remove('error')
+      } else {
+        elem.classList.add('error')
+      }
+    }
+  })
+}
+
+function eyeslash() {
+  let eyes = document.querySelectorAll('input[type="password"] ~ .fas')  
+  eyes.forEach((elem, index) => {
+    elem.onclick = function() {
+      const password = elem.parentNode.children[0]
+      const type = password.getAttribute("type") === "password" ? "text" : "password"
+      password.setAttribute("type", type)
+      elem.classList.toggle("fa-eye")
+    }
+  })
+}
+
+validations()
+eyeslash()
+maxrange('must18')
 init()
+ // console.dir(eyes)
