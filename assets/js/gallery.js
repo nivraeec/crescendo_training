@@ -25,7 +25,7 @@ function init() {
     // Gallery items
     galleryItem.forEach((item, key) => {
         const social = item.querySelectorAll(".gallery__social img");
-        const imgInterval = 300 * (key + 1);
+        const imgInterval = 300 * (key++);
 
         setTimeout(() => {
             item.style.opacity = 1;
@@ -62,7 +62,7 @@ function init() {
  */
 function showSocial(el, event = "add", intervalNum = 300) {
     el.forEach((img, key) => {
-        const interval = intervalNum * (key + 1);
+        const interval = intervalNum * (key++);
         setTimeout(() => {
             img.classList[event]("gallery__socialImg--default")
         }, interval);

@@ -65,19 +65,19 @@
         <div class="content">
             <div class="content__title">Register</div>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            <form method="POST" action="" class="form form--flex form--col2">
+            <form method="GET" action="" id="testingForm" class="form form--flex form--col2">
                 <div class="form__col">
                     <div class="form__input">
                         <label class="form__label"> Firstname </label>         
-                        <input type="text" name="firstname" placeholder="ex. Juan"/>
+                        <input type="text" name="fname" placeholder="ex. Juan"/>
                     </div> 
                     <div class="form__input">
                         <label class="form__label"> Middlename: </label>     
-                        <input type="text" name="middlename" placeholder="ex. Dhi"/>
+                        <input type="text" name="mname" placeholder="ex. Dhi"/>
                     </div> 
                     <div class="form__input">
                         <label class="form__label"> Lastname: </label>         
-                        <input type="text" name="lastname" placeholder="ex. Mahanap"/>
+                        <input type="text" name="lname" placeholder="ex. Mahanap"/>
                     </div> 
                     
                     <div class="form__input">
@@ -99,12 +99,25 @@
                         <label class="form__radio"><input type="radio" value="female" name="gender"/> Female </label>
                         <label class="form__radio"><input type="radio" value="other" name="gender"/> Other</label>
                     </div> 
+
+                    <div class="form__input">
+                        <label class="form__label">Civil Status :</label> 
+                        <label class="form__radio"><input type="radio" value="single" name="cstatus"/> Single </label>
+                        <label class="form__radio"><input type="radio" value="married" name="cstatus"/> Married </label>
+                        <label class="form__radio"><input type="radio" value="widow" name="cstatus"/> Widow</label>
+                    </div>  
+
                 </div>
 
                 <div class="form__col">
                     <div class="form__input">
+                        <label class="form__label">Birthday :</label>
+                        <input type="date" name="bday" id="bday"/>
+                    </div> 
+
+                    <div class="form__input">
                         <label class="form__label">Phone :</label>
-                        <input type="text" name="phone" placeholder="ex. 09999999999"/>
+                        <input type="text" name="phone" placeholder="ex. 09999999999" pattern="09[0-9]{9}"/>
                     </div>  
 
                     <div class="form__input">
@@ -119,12 +132,12 @@
 
                     <div class="form__input">
                         <label class="form__label">Password: </label> 
-                        <input type="Password" id="pass" name="pass" placeholder="minimum of 8 characters">   
+                        <input type="Password" id="pass" name="pass" placeholder="*minimum of 8 characters">   
                     </div>
 
                     <div class="form__input">
                         <label class="form__label">Re-type password:  </label>
-                        <input type="Password" id="repass" name="repass"> 
+                        <input type="Password" id="repass" name="repass" placeholder="*to verify your password"> 
                     </div>
                     <div class="form__buttons">
                         <!-- <input type="reset" value="Reset" class="form__btn form__btn--reset">
@@ -133,7 +146,8 @@
                         <button class="form__btn form__btn--submit">Submit</button>
                     </div>
                 </div>
-            </form>  
+            </form>
+            <!-- <input type="Password" id="testing" name="testing" form="testingForm"> -->
         </div>
 
         <footer class="footer">
