@@ -12,6 +12,12 @@
         <meta name="description" content=""/>
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="assets/scss/style.css" />
+        <style>
+            #jep{
+                resize: none;
+                word-wrap: break-word;
+            }
+        </style>
     </head>
     <body>
         <nav class="navigation">
@@ -69,7 +75,7 @@
                 <div class="form__col">
                     <div class="form__input">
                         <label class="form__label"> Firstname </label>         
-                        <input type="text" name="firstname" placeholder="ex. Juan"/>
+                        <input type="text"  name="firstname" placeholder="ex. Juan"/>
                     </div> 
                     <div class="form__input">
                         <label class="form__label"> Middlename: </label>     
@@ -92,6 +98,8 @@
                             <option value="M.Tech">M.Tech</option>  
                         </select>
                     </div>
+
+                    <textarea name="jep" id="jep" cols="30" rows="10"></textarea>
 
                     <div class="form__input">
                         <label class="form__label">Gender :</label> 

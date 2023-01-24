@@ -1,4 +1,4 @@
-import gallery from "./gallery.js";
+import gallery from "./gallery-convert.js";
 import forms from "./forms.js";
 
 function init() {
