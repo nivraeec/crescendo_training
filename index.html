@@ -17,6 +17,91 @@
                 resize: none;
                 word-wrap: break-word;
             }
+            /* div:nth-child(1).form__col div:nth-child(1).form__input:after {
+                display: none;
+            }
+            div:nth-child(1).form__col div:nth-child(1).form__input.showFirstName:after {
+                display: block;
+                content: 'Please enter your first name';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            div:nth-child(1).form__col div:nth-child(2).form__input:after {
+                display: block;
+                content: 'Please enter your middle name';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            div:nth-child(1).form__col div:nth-child(3).form__input:after {
+                display: block;
+                content: 'Please enter your last name';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            div:nth-child(1).form__col div:nth-child(4).form__input:after {
+                display: block;
+                content: 'Please select your course';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            div:nth-child(1).form__col div:nth-child(6).form__input:after {
+                display: block;
+                content: 'Please select your gender';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+          
+            div:nth-child(2).form__col div:nth-child(1).form__input:after {
+                display: block;
+                content: 'Please enter your address';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            div:nth-child(2).form__col div:nth-child(2).form__input:after {
+                display: block;
+                content: 'Please enter your address';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            div:nth-child(2).form__col div:nth-child(3).form__input:after {
+                display: block;
+                content: 'Please enter your email';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            div:nth-child(2).form__col div:nth-child(4).form__input:after {
+                display: block;
+                content: 'Please enter your password';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            }
+            div:nth-child(2).form__col div:nth-child(5).form__input:after {
+                display: block;
+                content: 'Your password is incorrect';
+                background: #f7c1c1;
+                margin-top: 20px;
+                padding-left: 10px;
+                font-weight: 500;
+            } */
+        
         </style>
     </head>
     <body>
@@ -73,21 +158,21 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             <form method="POST" action="" class="form form--flex form--col2">
                 <div class="form__col">
-                    <div class="form__input">
-                        <label class="form__label"> Firstname </label>         
+                    <div class="form__input ">
+                        <label class="form__label "> Firstname </label>         
                         <input type="text"  name="firstname" placeholder="ex. Juan"/>
                     </div> 
-                    <div class="form__input">
-                        <label class="form__label"> Middlename: </label>     
+                    <div class="form__input ">
+                        <label class="form__label "> Middlename: </label>     
                         <input type="text" name="middlename" placeholder="ex. Dhi"/>
                     </div> 
-                    <div class="form__input">
-                        <label class="form__label"> Lastname: </label>         
+                    <div class="form__input ">
+                        <label class="form__label "> Lastname: </label>         
                         <input type="text" name="lastname" placeholder="ex. Mahanap"/>
                     </div> 
                     
-                    <div class="form__input">
-                        <label class="form__label">Course :</label>   
+                    <div class="form__input ">
+                        <label class="form__label ">Course :</label>   
                         <select>  
                             <option value="">Select Course</option>  
                             <option value="BCA">BCA</option>  
@@ -101,7 +186,7 @@
 
                     <textarea name="jep" id="jep" cols="30" rows="10"></textarea>
 
-                    <div class="form__input">
+                    <div class="form__input ">
                         <label class="form__label">Gender :</label> 
                         <label class="form__radio"><input type="radio" value="male" name="gender"/> Male </label>
                         <label class="form__radio"><input type="radio" value="female" name="gender"/> Female </label>
@@ -110,27 +195,27 @@
                 </div>
 
                 <div class="form__col">
-                    <div class="form__input">
+                    <div class="form__input ">
                         <label class="form__label">Phone :</label>
                         <input type="text" name="phone" placeholder="ex. 09999999999"/>
                     </div>  
 
-                    <div class="form__input">
+                    <div class="form__input ">
                         <label class="form__label">Address</label>
                         <input type="text" id="address" name="address" placeholder="ex. Ilocos Sur, Philippines"/>
                     </div> 
                     
                     <div class="form__input">
-                        <label class="form__label">Email:</label>
+                        <label class="form__label  ">Email:</label>
                         <input type="email" id="email" name="email" placeholder="ex. name@email.com"/>   
                     </div>
 
-                    <div class="form__input">
+                    <div class="form__input ">
                         <label class="form__label">Password: </label> 
                         <input type="Password" id="pass" name="pass" placeholder="minimum of 8 characters">   
                     </div>
 
-                    <div class="form__input">
+                    <div class="form__input ">
                         <label class="form__label">Re-type password:  </label>
                         <input type="Password" id="repass" name="repass"> 
                     </div>
