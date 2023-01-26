@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <!--Change the text to "Register"-->
+</head>
+
+<style>
+    form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: aliceblue;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 25vw;
+        padding: 50px;
+        background-color: lightblue;
+    }
+
+    .registerbtn {  
+    background-color: #4CAF50;  
+    color: white;  
+    padding: 16px 20px;  
+    margin: 8px 0;  
+    border: none;  
+    cursor: pointer;  
+    width: 100%;  
+    opacity: 0.9;  
+    }  
+    .registerbtn:hover {  
+    opacity: 1;  
+    }  
+
+    input[type=text], input[type=password], textarea {  
+    padding: 15px;  
+    margin: 5px 0 22px 0;  
+    display: inline-block;  
+    border: none;  
+    background: #f1f1f1;  
+    }  
+    input[type=text]:focus, input[type=password]:focus {  
+    background-color: orange;  
+    outline: none;  
+    }  
+</style>
+
+<script>
+    //first name validation starts
+    function firstname_validation(){
+    'use strict';
+    var firstname_name = document.getElementById("firstname");
+    var firstname_value = document.getElementById("firstname").value;
+    var firstname_length = firstname_value.length;
+    var letters = /^[0-9a-zA-Z]+$/;
+    if(firstname_length < 4 || !firstname_value.match(letters))
+    {
+    document.getElementById('firstname_err').innerHTML = 'First name must be 4 chracters long and alphanuric chracters only.';
+    firstname_name.focus();
+    document.getElementById('firstname_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('firstname_err').innerHTML = 'Valid firstname';
+    document.getElementById('firstname_err').style.color = "#00AF33";
+    }
+    }
+    //first name validation ends
+
+    //middle name validation starts
+    function middlename_validation(){
+    'use strict';
+    var middlename_name = document.getElementById("middlename");
+    var middlename_value = document.getElementById("middlename").value;
+    var middlename_length = middlename_value.length;
+    var letters = /^[0-9a-zA-Z]+$/;
+    if(middlename_length < 4 || !middlename_value.match(letters))
+    {
+    document.getElementById('middlename_err').innerHTML = 'Middle name must be 4 chracters long and alphanuric chracters only.';
+    middlename_name.focus();
+    document.getElementById('middlename_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('middlename_err').innerHTML = 'Valid middlename';
+    document.getElementById('middlename_err').style.color = "#00AF33";
+    }
+    }
+    //middle name validation ends
+
+    //last name validation starts
+    function lastname_validation(){
+    'use strict';
+    var lastname_name = document.getElementById("lastname");
+    var lastname_value = document.getElementById("lastname").value;
+    var lastname_length = lastname_value.length;
+    var letters = /^[0-9a-zA-Z]+$/;
+    if(lastname_length < 4 || !lastname_value.match(letters))
+    {
+    document.getElementById('lastname_err').innerHTML = 'Last name must be 4 chracters long and alphanuric chracters only.';
+    lastname_name.focus();
+    document.getElementById('lastname_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('lastname_err').innerHTML = 'Valid lastname';
+    document.getElementById('lastname_err').style.color = "#00AF33";
+    }
+    }
+    //last name validation ends
+
+    //gender validation starts
+    function gender_validation(){
+    'use strict';
+    if ( (document.getElementById("msex").checked === false) && (document.getElementById("fsex").checked === false)){
+    document.getElementById('gender_err').innerHTML = 'Please slect a geneder.';
+    document.getElementById('gender_err').style.color = "#FF0000";
+    document.getElementById("msex").checked = true;
+    }
+    else
+    {
+    document.getElementById('gender_err').innerHTML = 'Gender selected';
+    document.getElementById('gender_err').style.color = "#00AF33";
+    }
+    }
+    //gender validation ends
+
+    //user id validation starts
+    function userid_validation(){
+    'use strict';
+    var userid_name = document.getElementById("userid");
+    var userid_value = document.getElementById("userid").value;
+    var userid_length = userid_value.length;
+    if(userid_length<7 || userid_length>12)
+    {
+    document.getElementById('uid_err').innerHTML = 'Value must not be less than 7 characters and greater than 12 characters';
+    userid_name.focus();
+    document.getElementById('uid_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('uid_err').innerHTML = 'Valid user id';
+    document.getElementById('uid_err').style.color = "#00AF33";
+    }
+    }
+    //user id validation ends
+
+    //email validation starts
+    function email_validation(){
+    'use strict';
+    var mailformat = /^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$/;
+    var email_name = document.getElementById("email");
+    var email_value = document.getElementById("email").value;
+    var email_length = email_value.length;
+    if(!email_value.match(mailformat) || email_length === 0)
+    {
+    document.getElementById('email_err').innerHTML = 'This is not a valid email format.';
+    email_name.focus();
+    document.getElementById('email_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('email_err').innerHTML = 'Valid email format';
+    document.getElementById('email_err').style.color = "#00AF33";
+    }
+    }
+    //email validation ends
+
+    //password validation starts
+    function passwd_validation(){
+    'use strict';
+    var passid_name = document.getElementById("passid");
+    var passid_value = document.getElementById("passid").value;
+    var passid_length = passid_value.length;
+    if(passid_length<6)
+    {
+    document.getElementById('passwd_err').innerHTML = 'Password must be at least 6 chracters long';
+    passid_name.focus();
+    document.getElementById('passwd_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('passwd_err').innerHTML = 'Valid password';
+    document.getElementById('passwd_err').style.color = "#00AF33";
+    }
+    }
+    //password validation ends
+</script>
+
+<body>
+    <form>
+        <div class="container">
+            <h1>Register</h1>
+            <p>Kindly fill in this form to register.</p>
+
+            <label for="firstname"><b>First name</b></label>
+            <input type="text" placeholder="Enter First name" name="firstname" id="firstname" size="50" onBlur="firstname_validation();"  required /><span id="firstname_err"></span>
+
+            <label for="middlename"><b>Middle name</b></label>
+            <input type="text" placeholder="Enter Middle name" name="middlename" id="middlename" size="50" onBlur="middlename_validation();"  required /><span id="middlename_err"></span>
+
+            <label for="lastname"><b>Last name</b></label>
+            <input type="text" placeholder="Enter Last name" name="lastname" id="lastname" size="50" onBlur="lastname_validation();"  required /><span id="lastname_err"></span>
+
+            <div>  
+                <label>   
+                <b>Gender :</b>  
+                </label><br>  
+                <input type="radio" name="msex" id="msex" value="Male" onBlur="gender_validation();">Male
+                <input type="radio" name="fsex" id="fsex" value="Female" onBlur="gender_validation();">Female<span id="gender_err"></span>
+            </div>  
+
+            <label for="Address"><b>Address</b></label>
+            <textarea id="Address" name="Address" cols="45" rows="2" maxlength="65525" required=""></textarea>
+
+            <label for="birthday"><b>Birthday</b></label>
+            <input type="date" id="birthday" name="birthday">
+
+
+            <label for="userid"><b>User id</b></label>
+            <input type="text" placeholder="Enter username" name="userid" id="userid" size="12" onBlur="userid_validation();"/><span id="uid_err"></span>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" id="email" size="50" onBlur="email_validation();"/><span id="email_err"></span>
+
+            <label for="passid"><b>Password</b></label>
+         
+            <input type="password" placeholder="Enter Password" name="passid" id="passid" size="12" onBlur="passwd_validation();" required/><span id="passwd_err"></span>
+
+            <button type="submit" class="registerbtn">Register</button>
+        </div>
+
+        <div>
+            <p>Already have an account? <a href="#">Log in</a>.</p>
+        </div>
+    </form>
+</body>
+
+</html>

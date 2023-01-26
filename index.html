@@ -13,6 +13,145 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="assets/scss/style.css" />
     </head>
+    <script>
+    //first name validation starts
+    function firstname_validation(){
+    'use strict';
+    var firstname_name = document.getElementById("firstname");
+    var firstname_value = document.getElementById("firstname").value;
+    var firstname_length = firstname_value.length;
+    var letters = /^[0-9a-zA-Z]+$/;
+    if(firstname_length < 4 || !firstname_value.match(letters))
+    {
+    document.getElementById('firstname_err').innerHTML = 'First name must be 4 characters long and alphanumeric characters only.';
+    firstname_name.focus();
+    document.getElementById('firstname_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('firstname_err').innerHTML = 'Valid firstname';
+    document.getElementById('firstname_err').style.color = "#00AF33";
+    }
+    }
+    //first name validation ends
+
+    //middle name validation starts
+    function middlename_validation(){
+    'use strict';
+    var middlename_name = document.getElementById("middlename");
+    var middlename_value = document.getElementById("middlename").value;
+    var middlename_length = middlename_value.length;
+    var letters = /^[0-9a-zA-Z]+$/;
+    if(middlename_length < 4 || !middlename_value.match(letters))
+    {
+    document.getElementById('middlename_err').innerHTML = 'Middle name must be 4 characters long and alphanumeric characters only.';
+    middlename_name.focus();
+    document.getElementById('middlename_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('middlename_err').innerHTML = 'Valid middlename';
+    document.getElementById('middlename_err').style.color = "#00AF33";
+    }
+    }
+    //middle name validation ends
+
+    //last name validation starts
+    function lastname_validation(){
+    'use strict';
+    var lastname_name = document.getElementById("lastname");
+    var lastname_value = document.getElementById("lastname").value;
+    var lastname_length = lastname_value.length;
+    var letters = /^[0-9a-zA-Z]+$/;
+    if(lastname_length < 4 || !lastname_value.match(letters))
+    {
+    document.getElementById('lastname_err').innerHTML = 'Last name must be 4 characters long and alphanumeric characters only.';
+    lastname_name.focus();
+    document.getElementById('lastname_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('lastname_err').innerHTML = 'Valid lastname';
+    document.getElementById('lastname_err').style.color = "#00AF33";
+    }
+    }
+    //last name validation ends
+
+    //email validation starts
+    function email_validation(){
+    'use strict';
+    var mailformat = /^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$/;
+    var email_name = document.getElementById("email");
+    var email_value = document.getElementById("email").value;
+    var email_length = email_value.length;
+    if(!email_value.match(mailformat) || email_length === 0)
+    {
+    document.getElementById('email_err').innerHTML = 'This is not a valid email format.';
+    email_name.focus();
+    document.getElementById('email_err').style.color = "#FF0000";
+    }
+    else
+    {
+    document.getElementById('email_err').innerHTML = 'Valid email format';
+    document.getElementById('email_err').style.color = "#00AF33";
+    }
+    }
+    //email validation ends
+
+    // phone number validation start
+    function validatePhoneNumber() {
+    var phoneNumber = document.getElementById("phoneNumber").value;
+    var phoneRegex = /^(09|\+639)[0-9]{9}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+        document.getElementById("phone_error").innerHTML = "Invalid phone number. Must start with 09 or +639 and have 11 digits.";
+        document.getElementById("phone_error").style.color = "#FF0000";
+    } else {
+        document.getElementById("phone_error").innerHTML = "Valid Phone Number";
+        document.getElementById("phone_error").style.color = "#00AF33";
+    }
+    }
+    // phone number validation end
+
+    // dropdown validation start
+    function validateDropdown() {
+    var dropdown = document.getElementById("dropdown");
+    var error = document.getElementById("dd_error");
+    
+    if (dropdown.value === "") {
+        error.innerHTML = "Please select an option";
+        document.getElementById("dd_error").style.color = "#FF0000";
+    } else {
+        error.innerHTML = "";
+        dropdown.getElementById.remove("dd_error");
+    }
+    }
+    // dropdown validation end
+
+    function validatePassword() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password.length < 8) {
+        alert("Password must be at least 8 characters long.");
+    } else if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+    } else {
+        document.getElementById("submit-button").disabled = false;
+    }
+    }
+
+    function validateConfirmPassword() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+    } else {
+        document.getElementById("submit-button").disabled = false;
+    }
+    }
+
+    </script>
     <body>
         <nav class="navigation">
             <div class="navigation__logo">
@@ -68,21 +207,22 @@
             <form method="POST" action="" class="form form--flex form--col2">
                 <div class="form__col">
                     <div class="form__input">
-                        <label class="form__label"> Firstname </label>         
-                        <input type="text" name="firstname" placeholder="ex. Juan"/>
+                        <label for="firstname" class="form__label"> Firstname </label>         
+                        <input type="text" placeholder="ex. Juan" name="firstname" id="firstname" size="50" onBlur="firstname_validation();"  required /><span id="firstname_err"></span>
                     </div> 
                     <div class="form__input">
-                        <label class="form__label"> Middlename: </label>     
-                        <input type="text" name="middlename" placeholder="ex. Dhi"/>
+                        <label for="middlename" class="form__label"> Middlename: </label>
+                        <input type="text" placeholder="ex. Dhi" name="middlename" id="middlename" size="50" onBlur="middlename_validation();"  required /><span id="middlename_err"></span>
+
                     </div> 
                     <div class="form__input">
-                        <label class="form__label"> Lastname: </label>         
-                        <input type="text" name="lastname" placeholder="ex. Mahanap"/>
+                        <label for="lastname" class="form__label"> Lastname: </label>         
+                        <input type="text" placeholder="ex. Mahanap" name="lastname" id="lastname" size="50" onBlur="lastname_validation();"  required /><span id="lastname_err"></span>
                     </div> 
                     
                     <div class="form__input">
                         <label class="form__label">Course :</label>   
-                        <select>  
+                        <select id="dropdown" onblur="validateDropdown()">  
                             <option value="">Select Course</option>  
                             <option value="BCA">BCA</option>  
                             <option value="BBA">BBA</option>  
@@ -91,6 +231,7 @@
                             <option value="MCA">MCA</option>  
                             <option value="M.Tech">M.Tech</option>  
                         </select>
+                        <span id="dd_error"></span>
                     </div>
 
                     <div class="form__input">
@@ -103,8 +244,9 @@
 
                 <div class="form__col">
                     <div class="form__input">
-                        <label class="form__label">Phone :</label>
-                        <input type="text" name="phone" placeholder="ex. 09999999999"/>
+                        <label for="phoneNumber" class="form__label">Phone Number:</label>
+                        <input type="text" id="phoneNumber" ame="phone" placeholder="ex. 09999999999" onblur="validatePhoneNumber()">
+                        <span id="phone_error"></span>
                     </div>  
 
                     <div class="form__input">
@@ -113,24 +255,25 @@
                     </div> 
                     
                     <div class="form__input">
-                        <label class="form__label">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="ex. name@email.com"/>   
+                        <label for="'email" class="form__label">Email:</label>
+                        <input type="text" placeholder="ex. name@email.com" name="email" id="email" size="50" onBlur="email_validation();"/><span id="email_err"></span>
                     </div>
 
                     <div class="form__input">
-                        <label class="form__label">Password: </label> 
-                        <input type="Password" id="pass" name="pass" placeholder="minimum of 8 characters">   
+                        <label class="form__label" for="password">Password: </label> 
+                        <input type="Password" id="password" name="pass" placeholder="minimum of 8 characters" onblur="validatePassword()">   
                     </div>
 
                     <div class="form__input">
-                        <label class="form__label">Re-type password:  </label>
-                        <input type="Password" id="repass" name="repass"> 
+                        <label class="form__label" for="confirm-password">Re-type password:  </label>
+                        <input type="Password" id="confirm-password" name="repass" onblur="validateConfirmPassword()"> 
                     </div>
+                      
                     <div class="form__buttons">
                         <!-- <input type="reset" value="Reset" class="form__btn form__btn--reset">
                         <input type="submit" value="Submit" class="form__btn form__btn--submit"> -->
                         <button class="form__btn form__btn--reset">Clear All</button>
-                        <button class="form__btn form__btn--submit">Submit</button>
+                        <button class="form__btn form__btn--submit" type="submit" id="submit-button" disabled>Submit</button>
                     </div>
                 </div>
             </form>  
