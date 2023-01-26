@@ -32,6 +32,17 @@
 
     &__input {
         margin-bottom: 20px;
+
+        &--error {
+            input, select, textarea {
+                border:1px solid #ff4747;
+                outline: none;
+            }
+
+            &_msg {
+                color: #ff4747;
+            }
+        }
     }
 
     &__buttons {

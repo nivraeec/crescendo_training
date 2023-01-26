@@ -1,4 +1,4 @@
-import helper from "./helper.js";
+import helper from "./components/typewriter/helper.js";
 import galleryData from "./data/gallery.js";
 
 const gallery = document.querySelector(".gallery");

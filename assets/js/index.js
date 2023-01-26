@@ -1,10 +1,11 @@
-import gallery from "./gallery.js";
-import forms from "./forms.js";
+import helper from "./components/typewriter/helper.js";
+import gallery from "./components/gallery/gallery.js";
+import forms from "./components/forms/forms.js";
 
 function init() {
     gallery.init();
-    forms.init();
-    console.log(forms.test);
+    helper.typeEffect();
+    forms.load();
 };
 
 init();
