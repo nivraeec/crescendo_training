@@ -1,13 +1,16 @@
 const func = {
     init() {
-        console.log(document.querySelectorAll("input"));
+       
         
         const fname = document.querySelector('[name="firstname"]');
         const lname = document.querySelector('[name="lastname"]');
         const mname = document.querySelector('[name="middlename"]');
         const address = document.querySelector('[name="address"]');
         const course = document.querySelector('[name="course"]');
+        const gender = document.querySelectorAll('[name="gender"]');
         const form = document.querySelector('form');
+                                                                                                                            
+        
  
         form.onsubmit = (e) => {
             e.preventDefault();
@@ -28,18 +31,30 @@ const func = {
            if(addressIndex[0] === '') {
                 this.errorMessage(address.parentNode, "<div class='errorMessage'>Please enter your address </div>");
            }
-
            if(!course.value) this.errorMessage(course.parentNode, "<div class='errorMessage'>Please select the course </div>");
+
+           if(!gender[0].checked && !gender[1].checked && !gender[2].checked) {
+            this.errorMessage(gender[0].parentNode.parentNode, "<div class='errorMessage'>Please select your gender </div>");
+           }
+           
+      
            
         }
+
+        gender.forEach((el, key) => {
+            el.onchange = () =>{
+               this.removeErrorMessage(el.parentNode.parentNode);
+            }
+        })
+
+
+       
 
         course.onchange = () =>{
         
             if (course.value.length) this.removeErrorMessage(course.parentNode);
-            console.log(course.value);
+           
         }
-
-     
 
         fname.onkeyup = () => {
            if(!fname.value.length) this.errorMessage(fname.parentNode, "<div class='errorMessage'> Please enter your first name </div>");
@@ -57,6 +72,8 @@ const func = {
             if(!address.value.length) this.errorMessage(address.parentNode, "<div class='errorMessage'> Please enter your address </div>");
             else this.removeErrorMessage(address.parentNode);
         }
+
+
         
     },
     errorMessage(container, errorText) {
