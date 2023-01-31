@@ -23,6 +23,10 @@ const typeWriter = {
                 el.textContent = paragraph.join("");
             }, interval);
         });
+    },
+
+    numberOnly() {
+        
     }
 }
 
