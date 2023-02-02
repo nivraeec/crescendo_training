@@ -51,5 +51,5 @@
             </div>
         </div>
     </body>
-    <script src="assets/js/registerValidation.js"></script>
+    <script src="assets/js/signup.js" type="module"></script>
 </html>
