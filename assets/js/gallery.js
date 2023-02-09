@@ -8,6 +8,11 @@ const pageSub = document.querySelector(".pageTitle__subtext");
 function init() {
     galleryTemplate();
 
+    let testing = 0;
+
+    if (testing) console.log(true);
+    else console.log(false);
+
     const galleryItem = gallery.querySelectorAll(".gallery__item");
 
     const scrollEvent = function() {

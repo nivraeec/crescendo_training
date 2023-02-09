@@ -18,6 +18,16 @@
     });
 };
 
+export const checkEmptyInput = (inpt) => {
+    let bool = [];
+
+    if (inpt.length) {
+        inpt.forEach(inptForm =>  bool.push(inptForm.value !== ""));
+        
+        return !bool.includes(false);
+    } else return bool = inpt.value !== "";
+}
+
 export default {
     typeEffect
 }

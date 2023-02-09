@@ -1,8 +1,15 @@
+import { checkEmptyInput } from "./helper.js";
+
 const func = {
+    inptText: document.querySelectorAll(".required"),
     init() {
-        console.log("test");
+        document.querySelector(".form__btn--submit").onclick = e => {
+            e.preventDefault();
+            if (checkEmptyInput(this.inptText)) {
+                console.log("Pasok")
+            } else console.log("Fill up all")
+        }
     },
-    test: "earvin"
 };
 
-export default { ...func };
+export default func;
