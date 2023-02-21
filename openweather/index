@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Openweather API</title>
+</head>
+<body>
+    <div class="name">
+        Name: <span></span>
+    </div>
+
+    <div class="temperature">
+        Temperature: <span></span>
+    </div>
+
+    <div class="humidity">
+        Humidity: <span></span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+
+      
+
+        $(document).ready(function(){
+            var api = $.getJSON("https://api.openweathermap.org/data/2.5/weather/?lat=34.0901&lon=-118.4065&units=metric&appid=4fdeb9e10790c987053ba5c3a34a34e8");
+
+           api.done(function (result){
+            $(".name > span").text(result.name);
+            $(".name > span").text(result.name);
+            $(".name > span").text(result.name);
+           });
+        });
+    </script>
+</body>
+</html>
