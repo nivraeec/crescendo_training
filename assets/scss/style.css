@@ -433,8 +433,7 @@ body {
   overflow: auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  background-color: #2b2b2b; }
+  justify-content: space-around; }
 .albumCardsContainerBg {
   height: 100%;
   width: 100vw;
@@ -444,7 +443,8 @@ body {
   filter: blur(20px);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center; }
+  background-position: center;
+  pointer-events: none; }
 .albumCard {
   width: 200px; }
 .albumCard a {

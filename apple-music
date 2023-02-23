@@ -15,8 +15,8 @@
     </head>
     <body>
         <div class="pageLayout">
+            <div class="albumCardsContainerBg"></div>
             <div class="albumCardsContainer">
-                <div class="albumCardsContainerBg"></div>
                 <!-- dynamic album cards here -->
                 <!-- <div class="albumCard">
                     <a href="https://music.apple.com/us/album/rolling-up-the-welcome-mat-ep/1668471788?uo=2">
