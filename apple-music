@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Crescendo Javascript Training</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="theme-color" content="#2196f3" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="format-detection" content="telephone=no, address=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-touch-fullscreen" content="yes"/>
+        <meta name="description" content=""/>
+        <meta name="keywords" content="" />
+        <link rel="stylesheet" href="/assets/scss/style.css" />
+    </head>
+    <body>
+        <div class="pageLayout">
+            <div class="albumCardsContainer">
+                <div class="albumCardsContainerBg"></div>
+                <!-- dynamic album cards here -->
+                <!-- <div class="albumCard">
+                    <a href="https://music.apple.com/us/album/rolling-up-the-welcome-mat-ep/1668471788?uo=2">
+                        <img src="https://is4-ssl.mzstatic.com/image/thumb/Music126/v4/9b/62/67/9b626725-dc44-d870-2d22-c2e471ee8182/197187960323.jpg/170x170bb.png" alt="">
+                        <p class="albumTitle">Rolling Up the Welcome Mat - EP</p>
+                    </a>
+                </div> -->
+            </div>
+            <div class="albumPopupContainer">
+                <div class="albumPopup">
+                    <span class="close">&times;</span>
+                    <img src="lololo" alt="">
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/assets/js/apple-music.js" type="module"></script>
+</html>
