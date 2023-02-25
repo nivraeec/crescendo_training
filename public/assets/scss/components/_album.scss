@@ -14,7 +14,7 @@ h2 {
         padding-bottom: 20px;
         background-image: url(/assets/img/header.png);
         background-size: cover;
-        height: 100vh;
+        height: 100%;
 
         .music__lists {
             overflow-y: scroll;
@@ -294,12 +294,12 @@ h2 {
     }
 }
 
-.heart {
+// .heart {
     
-    span:last-child {
-        display: none;
-    }
-}
+//     span:last-child {
+//         display: none;
+//     }
+// }
 
 
 /** Mobile **/

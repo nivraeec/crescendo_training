@@ -21,11 +21,11 @@ const _album = {
       window.itunesName = name
       window.itunesLink = uri
 
-      entry.forEach((el) => {
+      entry.forEach((el, i) => {
         let id = el['id']['attributes']['im:id']
         this.albums[id] = el
 
-        this.displayData(el)
+        this.displayData(el, i)
       });
       return window.albums = this.albums
     })
@@ -43,7 +43,7 @@ const _album = {
 
     setInterval(refresh, 1000)    
   },
-  displayData(album) {
+  displayData(album, i) {
     if(!album) return
 
     const musicListDiv = document.createElement('div')
@@ -209,7 +209,7 @@ const _album = {
     let alt = el['title']['label']
     let title = el['im:name']['label']
     let artist = el['im:artist']['label']
-    let artistLink = el['im:artist']['attributes']['href']
+    let artistLink = el['im:artist']//['attributes']['href']      
     let albumLink = el['id']['label']
     let category = el['category']['attributes']['label']
     let categoryLink = el['category']['attributes']['scheme']    
@@ -238,7 +238,17 @@ const _album = {
 
     _title.innerHTML = title
 
-    _artist.setAttribute('href', artistLink)
+    let {attributes, label} = artistLink
+    
+    if(!attributes) {
+      artistLink['attributes'] = []
+      artistLink['attributes']['href'] = '#'
+    } else {
+      let href = attributes['href']
+    }
+    
+
+    _artist.setAttribute('href', attributes['href'])
     _artist.innerHTML = artist
 
     _album.setAttribute('href', albumLink)
@@ -255,8 +265,8 @@ const _album = {
 
     this.displayActions(id, inArr, _heart)
 
-    // dialog
-    _dialog.onclick = (e) => {      
+    // Show Dialog
+    _dialog.onclick = (e) => {
 
       let target = e.target 
 
@@ -275,6 +285,27 @@ const _album = {
         window.likes = arr
 
         this.displayActions(id, arr.includes(id), target)
+      }
+
+      if(e.target.parentNode.classList.contains('right')) {
+        let current = e.target.parentNode.closest('#dialog')
+        let currentID = current.getAttribute('data-id')
+
+        let nextItem = document.querySelector(`.albums div[data-id="${currentID}"]`).nextElementSibling
+        if(!nextItem) return
+        let nextID = nextItem.getAttribute('data-id')
+        
+        this.displayDialog(nextID)
+      }
+      if(e.target.parentNode.classList.contains('left')) {
+        let current = e.target.parentNode.closest('#dialog')
+        let currentID = current.getAttribute('data-id')
+
+        let prevItem = document.querySelector(`.albums div[data-id="${currentID}"]`).previousElementSibling
+        if(!prevItem) return
+        let prevID = prevItem.getAttribute('data-id')
+        
+        this.displayDialog(prevID)
       }
     }
   },
@@ -314,6 +345,7 @@ const _album = {
       }
     }
   },
+
   
 }
 

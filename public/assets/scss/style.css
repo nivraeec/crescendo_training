@@ -2664,7 +2664,7 @@ h2 {
     padding-bottom: 20px;
     background-image: url(/assets/img/header.png);
     background-size: cover;
-    height: 100vh; }
+    height: 100%; }
     .musics .main .music__lists {
       overflow-y: scroll;
       height: 80vh; }
@@ -2836,9 +2836,6 @@ h2 {
 .music__option.play, .music__option.plus {
   display: none; }
 
-.heart span:last-child {
-  display: none; }
-
 /** Mobile **/
 @media (max-width: 767px) {
   nav.navigation {
@@ -2991,6 +2988,10 @@ h2 {
       padding: 20px 25px; }
     .dialog__options > div:hover {
       background-color: rgba(0, 0, 0, 0.2); }
+  .dialog__options.bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; }
 .dialog__container {
   width: 100%;
   display: flex;
