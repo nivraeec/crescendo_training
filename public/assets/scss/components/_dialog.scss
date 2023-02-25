@@ -1,0 +1,144 @@
+.dialog {
+    &:not(.active) {
+        display: none;
+    }
+
+    &.active {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        // display: flex;
+        align-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, .8);
+        color: #fff;
+        z-index: 999;
+    }
+
+    &__header {
+        width: 100%;
+    }
+
+    &__options {
+        text-align: right;
+
+        & > div {
+            float: right;
+
+            i {
+                cursor: pointer;
+                padding: 20px 25px;
+            }
+            
+            &:hover {
+                background-color: rgba(0, 0, 0, .2);
+            }
+        }
+    }
+
+    &__container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        flex-flow: column;        
+    }
+
+    &__content {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+
+        .title {
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .info {
+            text-transform: uppercase;
+            margin-top: 0;
+
+            a {
+                color: #ffffff;
+                padding: 0px 15px;
+                
+                
+                &:hover {
+                    opacity: 0.7;
+                }
+
+                &:first-child {
+                    padding-left: 0;
+                }
+
+                &.disabled {
+                    opacity: 1;
+                }
+                
+                &.album {
+                    text-decoration: underline;
+                }
+
+                &.category {
+                    border: 1px solid;
+                    border-radius: 30px;
+                    margin-left: 10px;
+
+                    &:hover {
+                        background-color: #fff;
+                        color: black;
+                    }
+                }
+            }            
+        }
+
+        .price {
+            font-size: 7vh;
+            margin: 0;
+        }
+        
+        
+    }
+
+    &__image {
+        margin-right: 20px;
+    }
+
+    &__description {
+        max-width: 40%;
+    }
+
+    &__buttons {
+        margin-top: 25px;
+        display: flex;
+
+        a {
+            color: #ffffff;
+            padding: 5px 15px;
+            border: 1px solid;
+            border-radius: 30px;
+            
+            &:first-child {
+                margin-right: 10px;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            i {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.hide {
+    display: none;
+}

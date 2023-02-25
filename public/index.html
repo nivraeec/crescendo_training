@@ -12,8 +12,9 @@
         <meta name="description" content=""/>
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="/assets/scss/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
-    <body>
+    <body class="musics">
         <nav class="navigation">
             <div class="navigation__logo">
                 <img src="assets/img/logo.png">
@@ -21,10 +22,10 @@
             <div class="navigation__menu">
                 <ul class="navigation__list">
                     <li class="navigation__item">
-                        <a href="#">HOME</a>
+                        <a href="/">HOME</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="#">GALLERY</a>
+                        <a href="/gallery">GALLERY</a>
                     </li>
                     <li class="navigation__item">
                         <a href="#">ABOUT US</a>
@@ -38,163 +39,145 @@
                 </ul>
             </div>
         </nav>
-
-        <div class="pageTitle">
-            <h1 class="pageTitle__text pageTitle__text--active">Gallery</h1>
-            <div class="pageTitle__subtext">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <main class="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="sidebar__wrapper col-md-3">
+                        <div class="songs">
+                            <div class="songs__header">
+                                <div id="player">
+                                    <div class="album">
+                                      <div class="heart"><i class="fas fa-heart"></i></div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="progress-bar">
+                                            <div class="time--current">1:25</div>
+                                            <div class="time--total">-3:15</div>
+                                            <div class="fill"></div>
+                                        </div>
+                                        <div class="currently-playing">
+                                            <h2 class="song-name">Symphony</h2>
+                                            <h3 class="artist-name">Clean Bandit ft. Zara Larsson</h3>
+                                        </div>
+                                        <div class="controls">
+                                            <div class="option"><i class="fas fa-bars"></i></div>
+                                            <div class="volume"><i class="fas fa-volume-up"></i></div>
+                                            <div class="previous"><i class="fas fa-backward"></i></div>
+                                            <div class="play"><i class="fas fa-play"></i></div>
+                                            <div class="pause"><i class="fas fa-pause"></i></div>
+                                            <div class="next"><i class="fas fa-forward"></i></div>
+                                            <div class="shuffle"><i class="fas fa-random"></i></div>
+                                            <div class="add"><i class="fas fa-plus"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="songs__queue">
+                                <h2>Favorites</h2>
+                                <div class="songs__faves likes music">
+                                    <div class="song flex hide">
+                                        <img src="assets/img/enlarge.png" alt="" />
+                                        <div class="desc">
+                                            <h5 class="title">Hello</h5>
+                                            <label>Adele</label>
+                                        </div>
+                                        <div class="music__options">
+                                            <div class="music__option play">
+                                                <i class="fas fa-play"></i>
+                                                <i class="fas fa-pause"></i>
+                                            </div>
+                                            <div class="music__option heart">
+                                                <i class="fa-regular fa-heart"></i>
+                                                <i class="fas fa-heart"></i>
+                                            </div>
+                                            <div class="music__option plus">
+                                                <i class="fas fa-plus"></i>
+                                                <i class="fas fa-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="music__wrapper col-md-9">
+                        <div class="music">
+                            <div class="music__header">
+                                <h2>Top Album</h2>
+                                <div class="music__nav flex space__between hide">
+                                    <div class="music__filters flex">
+                                        <div class="music__search">Search</div>
+                                        <div class="music__sort">Sort</div>
+                                    </div>
+                                    <div class="music__filters flex">
+                                        <div class="music__featured">Featured</div>
+                                        <div class="music__popular">Popular</div>
+                                        <div class="music__popular">Newests</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="albums row music__lists flex wrap"></div>
+                            <div class="music__lists row flex wrap hide">
+                                <!-- <div class="music__list col-md-2">
+                                        <div class="music__image">
+                                            <img src="assets/img/enlarge.png" alt="hahaha" />
+                                            <div class="music__options">
+                                                <div class="music__option play"><i class="fas fa-play" alt="Play Song"></i></div>
+                                                <div class="music__option heart"><i class="fas fa-heart" alt="Play Song"></i></div>
+                                                <div class="music__option plus"><i class="fas fa-plus" alt="Play Song"></i></div>
+                                            </div>
+                                        </div>
+                                        <div class="music__desc">
+                                            <label>Lorem Ipsum</label>
+                                            <p>Lorem Ipsum</p>
+                                        </div>
+                                </div> -->
+                            </div>
+                        </div>    
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="gallery">
-            <ul class="gallery__list">
-                <li class="gallery__item">
-                    <div class="gallery__imgEnlarge">
-                        <img src="assets/img/enlarge.png" alt="Enlarge">
-                    </div>
-                    <div class="gallery__imgContainer">
-                        <img src="assets/img/mountain1.jfif" class="gallery__img" alt="Mountain 1">
-                        <div class="gallery__imgDescription">
-                            <div class="gallery__social">
-                                <img src="assets/img/fb.png" class="gallery__socialImg">
-                                <img src="assets/img/instagram.webp" class="gallery__socialImg">
-                                <img src="assets/img/pinterest.png" class="gallery__socialImg">
-                            </div>
-                            <h2 class="gallery__imgTitle"></h2>
-                            <div class="gallery__detail">This is just a test!</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="gallery__item">
-                    <div class="gallery__imgEnlarge">
-                        <img src="assets/img/enlarge.png" alt="Enlarge">
-                    </div>
-                    <div class="gallery__imgContainer">
-                        <img src="assets/img/mountain2.jpg" class="gallery__img" alt="Mountain 2">
-                        <div class="gallery__imgDescription">
-                            <div class="gallery__social">
-                                <img src="assets/img/fb.png" class="gallery__socialImg">
-                                <img src="assets/img/instagram.webp" class="gallery__socialImg">
-                                <img src="assets/img/pinterest.png" class="gallery__socialImg">
-                            </div>
-                            <h2 class="gallery__imgTitle"></h2>
-                            <div class="gallery__detail">This is just a test!</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="gallery__item">
-                    <div class="gallery__imgEnlarge">
-                        <img src="assets/img/enlarge.png" alt="Enlarge">
-                    </div>
-                    <div class="gallery__imgContainer">
-                        <img src="assets/img/mountain3.jpg" class="gallery__img" alt="Mountain 3">
-                        <div class="gallery__imgDescription">
-                            <div class="gallery__social">
-                                <img src="assets/img/fb.png" class="gallery__socialImg">
-                                <img src="assets/img/instagram.webp" class="gallery__socialImg">
-                                <img src="assets/img/pinterest.png" class="gallery__socialImg">
-                            </div>
-                            <h2 class="gallery__imgTitle"></h2>
-                            <div class="gallery__detail">This is just a test!</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="gallery__item">
-                    <div class="gallery__imgEnlarge">
-                        <img src="assets/img/enlarge.png" alt="Enlarge">
-                    </div>
-                    <div class="gallery__imgContainer">
-                        <img src="assets/img/ocean1.jpg" class="gallery__img" alt="Ocean 1">
-                        <div class="gallery__imgDescription">
-                            <div class="gallery__social">
-                                <img src="assets/img/fb.png" class="gallery__socialImg">
-                                <img src="assets/img/instagram.webp" class="gallery__socialImg">
-                                <img src="assets/img/pinterest.png" class="gallery__socialImg">
-                            </div>
-                            <h2 class="gallery__imgTitle"></h2>
-                            <div class="gallery__detail">This is just a test!</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="gallery__item">
-                    <div class="gallery__imgEnlarge">
-                        <img src="assets/img/enlarge.png" alt="Enlarge">
-                    </div>
-                    <div class="gallery__imgContainer">
-                        <img src="assets/img/ocean2.webp" class="gallery__img" alt="Ocean 2">
-                        <div class="gallery__imgDescription">
-                            <div class="gallery__social">
-                                <img src="assets/img/fb.png" class="gallery__socialImg">
-                                <img src="assets/img/instagram.webp" class="gallery__socialImg">
-                                <img src="assets/img/pinterest.png" class="gallery__socialImg">
-                            </div>
-                            <h2 class="gallery__imgTitle"></h2>
-                            <div class="gallery__detail">This is just a test!</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="gallery__item">
-                    <div class="gallery__imgEnlarge">
-                        <img src="assets/img/enlarge.png" alt="Enlarge">
-                    </div>
-                    <div class="gallery__imgContainer">
-                        <img src="assets/img/ocean3.jpg" class="gallery__img" alt="Ocean 3">
-                        <div class="gallery__imgDescription">
-                            <div class="gallery__social">
-                                <img src="assets/img/fb.png" class="gallery__socialImg">
-                                <img src="assets/img/instagram.webp" class="gallery__socialImg">
-                                <img src="assets/img/pinterest.png" class="gallery__socialImg">
-                            </div>
-                            <h2 class="gallery__imgTitle"></h2>
-                            <div class="gallery__detail">This is just a test!</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="gallery__item">
-                    <div class="gallery__imgEnlarge">
-                        <img src="assets/img/enlarge.png" alt="Enlarge">
-                    </div>
-                    <div class="gallery__imgContainer">
-                        <img src="assets/img/download.jpg" class="gallery__img" alt="Galaxy 1">
-                        <div class="gallery__imgDescription">
-                            <div class="gallery__social">
-                                <img src="assets/img/fb.png" class="gallery__socialImg">
-                                <img src="assets/img/instagram.webp" class="gallery__socialImg">
-                                <img src="assets/img/pinterest.png" class="gallery__socialImg">
-                            </div>
-                            <h2 class="gallery__imgTitle"></h2>
-                            <div class="gallery__detail">This is just a test!</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="gallery__item">
-                    <div class="gallery__imgEnlarge">
-                        <img src="assets/img/enlarge.png" alt="Enlarge">
-                    </div>
-                    <div class="gallery__imgContainer">
-                        <img src="assets/img/galaxy2.jpg" class="gallery__img" alt="Galaxy 2">
-                        <div class="gallery__imgDescription">
-                            <div class="gallery__social">
-                                <img src="assets/img/fb.png" class="gallery__socialImg">
-                                <img src="assets/img/instagram.webp" class="gallery__socialImg">
-                                <img src="assets/img/pinterest.png" class="gallery__socialImg">
-                            </div>
-                            <h2 class="gallery__imgTitle"></h2>
-                            <div class="gallery__detail">This is just a test!</div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="content">
-            <div class="content__title">Lorem ipsum</div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </div>
-
+        </main>
         <footer class="footer">
-            <div class="footer__content">Footer part</div>
+            <div class="footer__content">&copy; 2023 All Rights Reserved. </div>
         </footer>
+        <div id="dialog" class="dialog">
+            <div class="dialog__container">
+                <div class="dialog__header">
+                    <div class="dialog__options">
+                        <div class="close"><i class="fas fa-close"></i></div>
+                    </div>
+                </div>
+                <div class="dialog__content">
+                    <div class="dialog__image">
+                        <img src="https://is4-ssl.mzstatic.com/image/thumb/Music125/v4/e2/4b/60/e24b6016-8278-bb18-cf5d-d44bf68371da/00602547223838.rgb.jpg/170x170bb.png" alt="Traveller -
+                        CHRIS STAPLETON" />
+                    </div>
+                    <div class="dialog__description">                
+                        <h2 class="title">Title here</h2>
+                        <h6 class="info">
+                            <a href="#" target="_blank" class="artist">Artist</a> | 
+                            <a href="#" target="_blank" class="album">Album</a> | 
+                            <a href="#" target="_blank" class="category">Category</a>
+                        </h6>
+    
+                        <p>Total Songs: <span class="total"></span></p>
+                        <p>Release Date: <span class="release"></span></p>
+    
+                        <p class="price">$10.99 USD</p>
+                        <div class="dialog__buttons">
+                            <a href="#" class="button heart"><i class="fas fa-heart"></i>Add to Favorites</a>
+                            <a href="#" target="_blank" class="button visit"><i class="fas fa-globe"></i>Buset iTunes</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="dialog__footer">
+                    ASDSADASDASD
+                </div>
+            </div>
+            <div class="dialog__sidebar"></div>
+        </div>
     </body>
-    <script type="module" src="assets/js/index.js"></script>
+    <!-- <script type="module" src="assets/js/player.js"></script> -->
+    <script type="module" src="assets/js/index.js"></script>    
 </html>

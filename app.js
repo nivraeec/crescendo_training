@@ -13,6 +13,11 @@ router.get('/',function(req,res){
   //__dirname : It will resolve to your project folder.
 });
 
+router.get('/gallery',function(req,res){
+  res.sendFile(path.join(__dirname+'/public/gallery.html'));
+});
+
+
 router.get('/register',function(req,res){
   res.sendFile(path.join(__dirname+'/public/register.html'));
 });

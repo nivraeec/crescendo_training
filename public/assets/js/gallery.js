@@ -1,10 +1,14 @@
 import helper from "./helper.js";
 
-const gallery = document.querySelector(".gallery");
-const galleryItem = gallery.querySelectorAll(".gallery__item");
-const pageSub = document.querySelector(".pageTitle__subtext");
+// const gallery = document.querySelector(".gallery");
+// const galleryItem = gallery.querySelectorAll(".gallery__item");
+// const pageSub = document.querySelector(".pageTitle__subtext");
 
-const _gallery = {    
+const _gallery = {
+    gallery: document.querySelector(".gallery"),
+    galleryItem: document.querySelectorAll(".gallery__item"),
+    pageSub: document.querySelector(".pageTitle__subtext"),
+
     showSocial(el, event = "add", intervalNum = 300) {
         el.forEach((img, key) => {
             const interval = intervalNum * (key + 1);
@@ -45,8 +49,8 @@ const _gallery = {
     
     
     
-        const galleryItem = gallery.querySelectorAll(".gallery__item");
-        galleryItem.forEach((item, key) => {
+        // const galleryItem = gallery.querySelectorAll(".gallery__item");
+        this.galleryItem.forEach((item, key) => {
             const { src, alt } = item.querySelector(".gallery__img"); 
             const img = item.querySelector(".gallery__img").cloneNode()
             if(index==key) {
@@ -56,7 +60,7 @@ const _gallery = {
             }
     
             if(key==0) img.classList.add('first')
-            else if(key==galleryItem.length-1) img.classList.add('last')
+            else if(key==this.galleryItem.length-1) img.classList.add('last')
             enlargeDiv.appendChild(img)
         })
     
@@ -101,6 +105,7 @@ const _gallery = {
         });
     },
     init() {
+        if(this.gallery === null) return;
         window.onscroll = () => {
             const scrollPos = window.scrollY;
             const nav = document.querySelector(".navigation");
@@ -110,7 +115,7 @@ const _gallery = {
         };
     
         // Gallery items
-        galleryItem.forEach((item, key) => {
+        this.galleryItem.forEach((item, key) => {
             const { src, alt } = item.querySelector(".gallery__img");
             const title = item.querySelector(".gallery__imgTitle");
             const social = item.querySelectorAll(".gallery__social img");
@@ -136,7 +141,7 @@ const _gallery = {
             }
         });
     
-        helper.typeEffect(pageSub, 50);
+        helper.typeEffect(this.pageSub, 50);
     },
 }
 
