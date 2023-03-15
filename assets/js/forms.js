@@ -46,10 +46,7 @@ const func = {
                this.removeErrorMessage(el.parentNode.parentNode);
             }
         })
-
-
-       
-
+    
         course.onchange = () =>{
         
             if (course.value.length) this.removeErrorMessage(course.parentNode);

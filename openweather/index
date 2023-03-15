@@ -7,6 +7,7 @@
     <title>Openweather API</title>
 </head>
 <body>
+<<<<<<< HEAD
     
     <div class="name">
         Name: <span></span>
@@ -14,12 +15,23 @@
     <div class="temperature">
         Temperature: <span></span>
     </div>
+=======
+    <div class="name">
+        Name: <span></span>
+    </div>
+
+    <div class="temperature">
+        Temperature: <span></span>
+    </div>
+
+>>>>>>> 1b722c0eab02815403ee8e2b5ed70af6dff23090
     <div class="humidity">
         Humidity: <span></span>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+<<<<<<< HEAD
         $(document).ready(function (){
             var api = $.getJSON("https://api.openweathermap.org/data/2.5/weather/?lat=21.0245&lon=105.8412&units=metric&appid=4fdeb9e10790c987053ba5c3a34a34e8");
 
@@ -29,6 +41,19 @@
                 $(".temperature > span").text(`${result.main.temp} C`);
                 $(".humidity > span").text(`${result.main.humidity} %`); 
             });
+=======
+
+      
+
+        $(document).ready(function(){
+            var api = $.getJSON("https://api.openweathermap.org/data/2.5/weather/?lat=34.0901&lon=-118.4065&units=metric&appid=4fdeb9e10790c987053ba5c3a34a34e8");
+
+           api.done(function (result){
+            $(".name > span").text(result.name);
+            $(".name > span").text(result.name);
+            $(".name > span").text(result.name);
+           });
+>>>>>>> 1b722c0eab02815403ee8e2b5ed70af6dff23090
         });
     </script>
 </body>
