@@ -68,7 +68,7 @@ const _gallery = {
         
         enlargeDiv.appendChild(navBtn)
     
-        document.addEventListener('click', function(event){
+        document.addEventListener('click', event => {
             const firstSlide = document.querySelector('.gallery__enlarge .first')
             const currentSlide = document.querySelector('.gallery__enlarge .show')
             const lastSlide = document.querySelector('.gallery__enlarge .last')
@@ -76,11 +76,11 @@ const _gallery = {
             if(event.target.classList.contains('gallery__next')) {                       
                 const nextSlide = currentSlide.nextSibling
                 if( lastSlide.classList.contains('show') ){
-                    classFunc([firstSlide, lastSlide], ['show', 'hide'])
-                    classFunc([firstSlide, lastSlide], ['hide', 'show'], 'remove')
+                    this.classFunc([firstSlide, lastSlide], ['show', 'hide'])
+                    this.classFunc([firstSlide, lastSlide], ['hide', 'show'], 'remove')
                 } else {
-                    classFunc([nextSlide, currentSlide], ['show', 'hide'])
-                    classFunc([nextSlide, currentSlide], ['hide', 'show'], 'remove')
+                    this.classFunc([nextSlide, currentSlide], ['show', 'hide'])
+                    this.classFunc([nextSlide, currentSlide], ['hide', 'show'], 'remove')
                 }
     
             } else if (event.target.classList.contains('gallery__prev')) {
@@ -88,14 +88,16 @@ const _gallery = {
                 const prevSlide = currentSlide.previousSibling           
     
                 if( firstSlide.classList.contains('show') ){
-                    classFunc([lastSlide, firstSlide], ['show', 'hide'])
+                    this.classFunc([lastSlide, firstSlide], ['show', 'hide'])
                     classFunc([lastSlide, firstSlide], ['hide', 'show'], 'remove')
                 } else {
-                    classFunc([prevSlide, currentSlide], ['show', 'hide'])
-                    classFunc([prevSlide, currentSlide], ['hide', 'show'], 'remove')
+                    this.classFunc([prevSlide, currentSlide], ['show', 'hide'])
+                    this.classFunc([prevSlide, currentSlide], ['hide', 'show'], 'remove')
+                    
                 }
             }
         })
+        
     },
     classFunc(elArr = [], _classArr = [], _event = 'add' ) {
         if (!_classArr) return false;

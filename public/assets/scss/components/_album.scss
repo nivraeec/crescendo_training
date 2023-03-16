@@ -294,12 +294,34 @@ h2 {
     }
 }
 
-// .heart {
-    
-//     span:last-child {
-//         display: none;
-//     }
-// }
+.likes {
+    & > div {
+        cursor: pointer;
+    }
+}
+
+.scrollable {
+    overflow-y: scroll;
+    height: min(100vh - 20vh);
+
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        
+        &:vertical {
+            width: 11px;
+        }
+
+        &:horizontal {
+            height: 11px;
+        }
+
+        &-thumb {
+            border-radius: 8px;
+            border: 2px solid white; /* should match background, can't be transparent */
+            background-color: rgba(0, 0, 0, .5);
+        }
+    }
+}
 
 
 /** Mobile **/
@@ -335,5 +357,25 @@ h2 {
                 width: 75px;
             }
         }
+    }
+}
+
+
+#dialog.album {
+    @media screen and (max-width: 767px){
+        .dialog__content {
+            flex-direction: column;
+            align-items: center;
+    
+            .dialog__image {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+    
+            .dialog__description {
+                max-width: 90%;
+            }
+        }
+    
     }
 }

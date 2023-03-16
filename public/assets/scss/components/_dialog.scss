@@ -1,10 +1,15 @@
+body {
+    &.openDialog {
+        overflow-y: hidden;
+    }
+}
 .dialog {
     &:not(.active) {
         display: none;
     }
 
     &.active {
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
         bottom: 0;

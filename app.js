@@ -22,6 +22,10 @@ router.get('/register',function(req,res){
   res.sendFile(path.join(__dirname+'/public/register.html'));
 });
 
+router.get('/wufoo',function(req,res){
+  res.sendFile(path.join(__dirname+'/public/wufoo.html'));
+});
+
 // post
 router.post('/register',urlencodedParser, function(req, res, next){
   const {firstname, lastname, username} = req.body

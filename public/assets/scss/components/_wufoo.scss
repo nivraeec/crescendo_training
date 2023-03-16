@@ -1,0 +1,66 @@
+#wufoo-data {
+  padding-top: 100px;
+
+  table {
+    width: 100%;
+    
+    tr {
+      &.admin {
+        background-color: #ffa7a7;
+      }
+    }
+    td {
+      text-align: center;
+      padding: 5px;
+
+      &.alignLeft {
+        text-align: left;
+      }
+    }
+  }
+}
+
+#dialog.wufoo-forms {
+  &.active {
+    backdrop-filter: blur(5px);
+  }
+  td {
+    text-align: center;
+  }
+  .dialog__content {
+    justify-content: space-between;
+    
+    .dialog__description {
+      max-width: 100%;
+      overflow-y: scroll;
+      height: 85vh;
+
+      tr {
+        &:nth-child(even) {
+          background-color: rgba(0, 0, 0, 0.37);
+        }
+      }
+
+      .forms {
+        td {
+          .icon {
+            color: inherit;
+            
+            i {
+              padding: 10px;
+              border: 1px solid;
+              border-radius: 40px;
+              height: 40px;
+              width: 40px;
+              display: inline-block;
+              align-items: end;
+              vertical-align: text-bottom;
+            }
+          }
+        }
+      }
+    }
+
+
+  }  
+}

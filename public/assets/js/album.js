@@ -2,16 +2,44 @@ const _album = {
   albumDiv: document.querySelector('.albums'),
   likesDiv: document.querySelector('.likes'),
   dialogDiv: document.querySelector('.dialog'),
+  sortBtn: document.querySelectorAll('[data-sort]'),
   albums: [],
   likes: [],
+  sort: [],
   init() {
     if(this.albumDiv === null) return;
+    
     this.getData()
     this.getLikes()
+    this.getFilterV2()
     
+    // this.getDatav2().then(({feed}) => {
+    //   let {author, entry, rights, title} = feed
+    //   this.albums = entry
+    //   let tmp_albums = []
+      
+    //   entry.forEach((el, i) => {
+    //     let id = el['id']['attributes']['im:id']
+        
+    //     tmp_albums[id] = el
+    //     // this.displayData(el, i)
+    //     this.displayDataV2(el, i)
+    //   })
+
+    //   this.albums = tmp_albums
+    // });
+
+
+  },
+  set yawa(data) {
+    this.albums = data
+    console.log(this.albums)
+  },
+  get huh() {
+    return this.albums
   },
   getData() {
-    fetch('https://itunes.apple.com/us/rss/topalbums/limit=100/json')
+    fetch('https://itunes.apple.com/us/rss/topalbums/limit=150/json')
     .then((response) => response.json())
     .then((data) => {
       let { feed } = data      
@@ -21,23 +49,41 @@ const _album = {
       window.itunesName = name
       window.itunesLink = uri
 
+      let tmp_albums = []
+
       entry.forEach((el, i) => {
         let id = el['id']['attributes']['im:id']
-        this.albums[id] = el
-
-        this.displayData(el, i)
+        
+        tmp_albums[id] = el
+        // this.displayData(el, i)
+        this.displayDataV2(el, i)
+        this.storage(id, el)
       });
-      return window.albums = this.albums
+
+      this.albums = tmp_albums
+      this.yawa = this.albums
+      
+      // this.storage(tmp_albums)
+
     })
     .catch((error) => console.error(error))
   }, 
+  async getDatav2() {
+    const response = await fetch('https://itunes.apple.com/us/rss/topalbums/limit=150/json');
+    const albums = await response.json();
+    return albums;
+  },
+  storage(id, data) {
+    return localStorage.setItem(id, JSON.stringify(data));
+  },
   getLikes() {
     let likes = this.likes
 
     let refresh = () => {
       this.likesDiv.innerHTML = ''
       likes.forEach(el => {
-        this.displayLikes(el)
+        // this.displayLikes(el)
+        this.displayLikesV2(el)
       })
     }
 
@@ -130,11 +176,33 @@ const _album = {
     this.albumDiv.appendChild(musicListDiv)
     this.getActions(musicListDiv, this.likes)
   }, 
+  displayDataV2(album, i) {
+    if(!album) return
+
+    let html = ''
+    html = `<div class="music__list album col-md-2 col-sm-3" data-id="${album.id.attributes['im:id']}">
+              <div class="music__image">
+                <img src="${album['im:image'][2]['label']}" alt="${album['im:name']['label']}">
+                <div class="music__options">
+                  <div class="music__option play"><i class="fas fa-play"></i><i class="fas fa-pause"></i></div>
+                  <div class="music__option heart"><i class="fa-regular fa-heart"></i><i class="fas fa-heart"></i></div>
+                  <div class="music__option plus"><i class="fas fa-plus"></i><i class="fas fa-check"></i></div>
+                </div>
+              </div>
+              <div class="music__desc">
+                <label>${album['im:name']['label']}</label>
+                <p>${album['im:artist']['label']}</p>
+              </div>
+            </div>`
+    this.albumDiv.innerHTML += html
+    this.getActions(this.albumDiv, this.likes)
+  },
   displayLikes(album) {
     if(!album) return
 
     let el = this.albums[album]
     
+    let _id = el['id']['attributes']['im:id']
     let _image = el['im:image'][1]['label']
     let _title = el['im:name']['label']
     let _artist = el['im:artist']['label']
@@ -158,6 +226,7 @@ const _album = {
 
     songDiv.classList.add('song')
     songDiv.classList.add('flex')
+    songDiv.setAttribute('data-id', _id)
 
     image.setAttribute('src', _image)
     image.setAttribute('alt', `${_alt}`)
@@ -200,6 +269,29 @@ const _album = {
     songDiv.appendChild(options)
 
     this.likesDiv.appendChild(songDiv)
+
+    songDiv.onclick = (e) => {
+      let _e = e.target.parentNode
+      console.log(_e)
+      if( _e.closest('[data-id]') ) {
+        let id = _e.closest('[data-id]').getAttribute('data-id')
+        console.log(id)
+        document.querySelector('#dialog').classList.add('active')
+        this.displayDialog(id)
+      }
+      
+    }
+  },
+  displayLikesV2(album) {
+    let html = ''
+    album = this.albums[album]
+    
+    html = `<div class="song flex" data-id="${album.id.attributes['im:id']}">
+              <img src="${album['im:image'][1]['label']}" alt="${album['im:name']['label']}"><div class="desc">
+              <h5 class="title">${album['im:name']['label']}</h5>
+              <label>${album['im:artist']['label']}</label>
+            </div>`
+    this.likesDiv.innerHTML += html
   },
   displayDialog(album) {
     let el = this.albums[album]
@@ -229,7 +321,7 @@ const _album = {
     let _visit = document.querySelector('.dialog .visit')
     let _heart = document.querySelector('.dialog .heart')
 
-    _visit.setAttribute('href', window.itunesLink.label)
+    // _visit.setAttribute('href', window.itunesLink.label)
     
     _dialog.setAttribute('data-id', id)
 
@@ -309,9 +401,61 @@ const _album = {
       }
     }
   },
+  displayDialogV2(album) {    
+    let data = this.albums[album]
+    let jsdata = localStorage.getItem(album)
+    // console.log( localStorage )
+    console.log( JSON.parse(jsdata) )
+    let  {
+      category,
+      id,
+      'im:artist': artist,
+      'im:contentType': contentType,
+      'im:image': image,
+      'im:itemCount': itemCount,
+      'im:name': name,
+      'im:price': price,
+      'im:releaseDate': releaseDate,
+      link,
+      rights,
+      title,
+    } = data
+
+    if(!artist.attributes) {
+      artist.attributes = []
+      artist.attributes.href = '#'
+    } 
+
+    let html = ''
+    html = `<div class="dialog__image">
+                <img src="${image[2].label}" alt="${title.label}">
+            </div>
+            <div class="dialog__description">
+                <h2 class="title">${title.label}</h2>
+                <h6 class="info">
+                    <a href="${artist.attributes.href}" target="_blank" class="artist">${artist.label}</a> | 
+                    <a href="${link.attributes.href}" target="_blank" class="album">Album</a> | 
+                    <a href="${category.attributes.scheme}" target="_blank" class="category">${category.attributes.label}</a>
+                </h6>
+
+                <p>Total Songs: <span class="total">${itemCount.label}</span></p>
+                <p>Release Date: <span class="release">${releaseDate.attributes.label}</span></p>
+
+                <p class="price">${price.label}</p>
+                <div class="dialog__buttons">
+                    ${this.displayActionsv2(id.attributes['im:id'])}
+                    <a href="#" target="_blank" class="button visit"><i class="fas fa-globe"></i>Buset iTunes</a>
+                </div>
+            </div>`
+    
+    document.querySelector('.dialog__content').innerHTML = html
+
+    this.dialogDiv.setAttribute('data-id', id.attributes['im:id'])
+    this.getActionsDialogV2()
+  },
   displayActions(id, isTrue, target) {
     let huh = document.querySelector(`[data-id="${id}"] .heart`)
-    
+    // huh.classList.toggle('active')
     if(isTrue) {
       target.innerHTML = '<i class="fa-regular fa-heart"></i> Remove from Favorites'
       huh.classList.add('active')
@@ -320,12 +464,18 @@ const _album = {
       huh.classList.remove('active')
     }
   },
+  displayActionsv2(id) {
+    let album = document.querySelector(`.album[data-id="${id}"] .heart`)
+    album.classList.toggle('active')
+    
+    return `${(this.likes.includes(id)) ? 
+    '<a href="#" class="button heart"><i class="fa-regular fa-heart"></i> Remove from Favorites</a>' : 
+    '<a href="#" class="button heart"><i class="fas fa-heart"></i> Add to Favorites</a>' }`
+  },
   getActions(el, arr) {
     el.onclick = (e) => {
       let parentNode = e.target.parentNode
       let id = parentNode.closest('[data-id]').getAttribute('data-id')
-
-      // console.log(e.target)
 
       if(parentNode.classList.contains('heart')) {
         parentNode.classList.toggle('active')
@@ -340,13 +490,73 @@ const _album = {
       }
 
       if(parentNode.classList.contains('music__image')) {
-        this.displayDialog(id)
-        this.dialogDiv.classList.add('active')        
+        // this.displayDialog(id)
+        this.displayDialogV2(id)
+        this.dialogDiv.classList.add('active')
       }
     }
   },
+  getActionsDialogV2() {
+    const el = this.dialogDiv
+    let arr = this.likes
 
-  
+    el.onclick = (e) => {
+      let target = e.target 
+      let current = e.target.parentNode.closest('#dialog')
+      let id = current.getAttribute('data-id')
+
+      if(e.target.parentNode.classList.contains('close')) {
+        el.classList.remove('active')
+      }
+
+      if(e.target.classList.contains('heart')) {
+        e.target.classList.toggle('active')
+
+        if(arr.includes(id)) {
+          arr.splice(arr.indexOf(id), 1)
+        } else {
+          arr.push(id)
+        }
+        // window.likes = arr
+
+        this.displayActions(id, arr.includes(id), target)
+      }
+      // Next and Prev
+      if(e.target.parentNode.classList.contains('right')) {        
+        let nextItem = document.querySelector(`.albums div[data-id="${id}"]`).nextElementSibling
+        if(!nextItem) return
+        let nextID = nextItem.getAttribute('data-id')
+        
+        this.displayDialogV2(nextID)
+      }
+      if(e.target.parentNode.classList.contains('left')) {
+        let prevItem = document.querySelector(`.albums div[data-id="${id}"]`).previousElementSibling
+        if(!prevItem) return
+        let prevID = prevItem.getAttribute('data-id')
+        
+        this.displayDialogV2(prevID)
+      }
+      // endof Next and Prev
+    }
+  },  
+  getFilterV2() {
+    let el = document.querySelector('.album__header')
+    el.onclick = (e) => {
+      let datas = this.albums
+      // let 0 - Default 
+      // let 1 - Ascending
+      // ket 2 - Descending
+      console.log(datas)     
+    }
+  },
+  // this.download(JSON.stringify(tmp_albums), 'json.txt', 'text/json');
+  download (content, filename, contentType) {
+    var a = document.createElement("a");
+    var file = new Blob([content], {type: contentType});
+    a.href = URL.createObjectURL(file);
+    a.download = filename;
+    a.click();
+  }
 }
 
 export default {..._album};

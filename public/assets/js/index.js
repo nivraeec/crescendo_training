@@ -1,13 +1,18 @@
+import menu from "./menu.js"
 import gallery from "./gallery.js"
-import music from "./music.js"
+import form from "./form_v2.js"
 import player from "./player.js"
 import album from "./album.js"
+import wufoo from "./wufoo.js"
 
 function init() {
+    menu.init()
     gallery.init()
-    // music.init()
+    form.init()
     player.init()
     album.init()
+    wufoo.init()
+
 };
 
 init();

@@ -74,8 +74,8 @@
                             </div>
                             <div class="songs__queue">
                                 <h2>Favorites</h2>
-                                <div class="songs__faves likes music">
-                                    <div class="song flex hide">
+                                <div class="songs__faves likes scrollable">
+                                    <div class="song flex">
                                         <img src="assets/img/enlarge.png" alt="" />
                                         <div class="desc">
                                             <h5 class="title">Hello</h5>
@@ -102,12 +102,16 @@
                     </div>
                     <div class="music__wrapper col-md-9">
                         <div class="music">
-                            <div class="music__header">
+                            <div class="album__header music__header">
                                 <h2>Top Album</h2>
-                                <div class="music__nav flex space__between hide">
+                                <div class="music__nav flex space__between">
                                     <div class="music__filters flex">
-                                        <div class="music__search">Search</div>
-                                        <div class="music__sort">Sort</div>
+                                        <div class="music__search">
+                                            Search
+                                        </div>
+                                        <div class="music__sort album__sort lists">
+                                            Sort
+                                        </div>
                                     </div>
                                     <div class="music__filters flex">
                                         <div class="music__featured">Featured</div>
@@ -115,8 +119,13 @@
                                         <div class="music__popular">Newests</div>
                                     </div>
                                 </div>
+                                <div class="album__options music__filters">
+                                    <div class="">Album</div>
+                                    <div class="">Artist</div>
+                                    <div class="">price</div>
+                                </div>
                             </div>
-                            <div class="albums row music__lists flex wrap"></div>
+                            <div class="albums row scrollable flex wrap"></div>
                             <div class="music__lists row flex wrap hide">
                                 <!-- <div class="music__list col-md-2">
                                         <div class="music__image">
@@ -141,7 +150,7 @@
         <footer class="footer">
             <div class="footer__content">&copy; 2023 All Rights Reserved. </div>
         </footer>
-        <div id="dialog" class="dialog">
+        <div id="dialog" class="dialog album">
             <div class="dialog__container">
                 <div class="dialog__header">
                     <div class="dialog__options">
