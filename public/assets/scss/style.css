@@ -324,6 +324,9 @@ a {
   color: #333;
   text-decoration: none; }
 
+*.hide {
+  display: none !important; }
+
 .flex {
   display: flex; }
 
@@ -3080,9 +3083,6 @@ body.openDialog {
       margin-right: 0; }
     .dialog__buttons a i {
       margin-right: 5px; }
-
-.hide {
-  display: none; }
 
 #wufoo-data {
   padding-top: 100px; }

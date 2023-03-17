@@ -15,3 +15,7 @@ a {
     color: $dark-color;
     text-decoration: none;
 }
+
+*.hide {
+    display: none !important;
+}

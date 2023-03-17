@@ -9,31 +9,19 @@ const _album = {
   init() {
     if(this.albumDiv === null) return;
     
+    // store data on browser
     this.getData()
+
+    
+
+    // 
     this.getLikes()
     this.getFilterV2()
-    
-    // this.getDatav2().then(({feed}) => {
-    //   let {author, entry, rights, title} = feed
-    //   this.albums = entry
-    //   let tmp_albums = []
-      
-    //   entry.forEach((el, i) => {
-    //     let id = el['id']['attributes']['im:id']
-        
-    //     tmp_albums[id] = el
-    //     // this.displayData(el, i)
-    //     this.displayDataV2(el, i)
-    //   })
-
-    //   this.albums = tmp_albums
-    // });
-
 
   },
   set yawa(data) {
     this.albums = data
-    console.log(this.albums)
+    // console.log(this.albums)
   },
   get huh() {
     return this.albums
@@ -56,14 +44,15 @@ const _album = {
         
         tmp_albums[id] = el
         // this.displayData(el, i)
-        this.displayDataV2(el, i)
+        // this.displayDataV2(el, i)
         this.storage(id, el)
       });
 
       this.albums = tmp_albums
       this.yawa = this.albums
       
-      // this.storage(tmp_albums)
+      // display stored data
+     this.displayAllDataV2()
 
     })
     .catch((error) => console.error(error))
@@ -88,6 +77,18 @@ const _album = {
     }
 
     setInterval(refresh, 1000)    
+  },
+  displayAllDataV2() {
+
+    let object = localStorage
+    
+    for (const key in object) {
+      if (Object.hasOwnProperty.call(object, key)) {
+        const element = object[key];
+        this.displayDataV2(key)
+        // console.log(key)
+      }
+    }
   },
   displayData(album, i) {
     if(!album) return
@@ -179,21 +180,43 @@ const _album = {
   displayDataV2(album, i) {
     if(!album) return
 
-    let html = ''
-    html = `<div class="music__list album col-md-2 col-sm-3" data-id="${album.id.attributes['im:id']}">
+    album = JSON.parse(localStorage.getItem(album))
+
+    let  {
+      id,
+      'im:artist': artist,
+      'im:image': image,
+      'im:name': name,
+    } = album
+    
+    let [img0, img1, img2] = image
+    let { label } = name
+    let { label: arlabel } = artist
+
+    let html = `<div class="music__list album col-md-2 col-sm-3" data-id="${id.attributes['im:id']}">
               <div class="music__image">
-                <img src="${album['im:image'][2]['label']}" alt="${album['im:name']['label']}">
+                <img src="${img2.label}" alt="${label}">
                 <div class="music__options">
-                  <div class="music__option play"><i class="fas fa-play"></i><i class="fas fa-pause"></i></div>
-                  <div class="music__option heart"><i class="fa-regular fa-heart"></i><i class="fas fa-heart"></i></div>
-                  <div class="music__option plus"><i class="fas fa-plus"></i><i class="fas fa-check"></i></div>
+                  <div class="music__option play">
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-pause"></i>
+                  </div>
+                  <div class="music__option heart">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fas fa-heart"></i>
+                  </div>
+                  <div class="music__option plus">
+                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-check"></i>
+                  </div>
                 </div>
               </div>
               <div class="music__desc">
-                <label>${album['im:name']['label']}</label>
-                <p>${album['im:artist']['label']}</p>
+                <label>${label}</label>
+                <p>${arlabel}</p>
               </div>
             </div>`
+
     this.albumDiv.innerHTML += html
     this.getActions(this.albumDiv, this.likes)
   },
@@ -272,10 +295,10 @@ const _album = {
 
     songDiv.onclick = (e) => {
       let _e = e.target.parentNode
-      console.log(_e)
+      // console.log(_e)
       if( _e.closest('[data-id]') ) {
         let id = _e.closest('[data-id]').getAttribute('data-id')
-        console.log(id)
+        // console.log(id)
         document.querySelector('#dialog').classList.add('active')
         this.displayDialog(id)
       }
@@ -285,11 +308,23 @@ const _album = {
   displayLikesV2(album) {
     let html = ''
     album = this.albums[album]
+
+    let  {
+      id,
+      'im:artist': artist,
+      'im:image': image,
+      'im:name': name,
+    } = album
+
+    let {'im:id':albumId} = id.attributes
+    let [img0, img1, img2] = image
+    let { label: albumLabel } = name
+    let { label: artistLabel } = artist
     
-    html = `<div class="song flex" data-id="${album.id.attributes['im:id']}">
-              <img src="${album['im:image'][1]['label']}" alt="${album['im:name']['label']}"><div class="desc">
-              <h5 class="title">${album['im:name']['label']}</h5>
-              <label>${album['im:artist']['label']}</label>
+    html = `<div class="song flex" data-id="${albumId}">
+              <img src="${img1.label}" alt="${albumLabel}"><div class="desc">
+              <h5 class="title">${albumLabel}</h5>
+              <label>${artistLabel}</label>
             </div>`
     this.likesDiv.innerHTML += html
   },
@@ -404,22 +439,26 @@ const _album = {
   displayDialogV2(album) {    
     let data = this.albums[album]
     let jsdata = localStorage.getItem(album)
-    // console.log( localStorage )
-    console.log( JSON.parse(jsdata) )
+    
+    data = JSON.parse(jsdata)
     let  {
       category,
       id,
       'im:artist': artist,
-      'im:contentType': contentType,
       'im:image': image,
       'im:itemCount': itemCount,
-      'im:name': name,
       'im:price': price,
       'im:releaseDate': releaseDate,
+      'im:name': name,
       link,
-      rights,
       title,
     } = data
+
+    let {'im:id':albumId} = id.attributes
+    let [img0, img1, img2] = image
+    let { label: albumLabel } = name
+    let { label: artistLabel } = artist
+    let { label: titleLabel } = title
 
     if(!artist.attributes) {
       artist.attributes = []
@@ -428,12 +467,12 @@ const _album = {
 
     let html = ''
     html = `<div class="dialog__image">
-                <img src="${image[2].label}" alt="${title.label}">
+                <img src="${img2.label}" alt="${titleLabel}">
             </div>
             <div class="dialog__description">
-                <h2 class="title">${title.label}</h2>
+                <h2 class="title">${albumLabel}</h2>
                 <h6 class="info">
-                    <a href="${artist.attributes.href}" target="_blank" class="artist">${artist.label}</a> | 
+                    <a href="${artist.attributes.href}" target="_blank" class="artist">${artistLabel}</a> | 
                     <a href="${link.attributes.href}" target="_blank" class="album">Album</a> | 
                     <a href="${category.attributes.scheme}" target="_blank" class="category">${category.attributes.label}</a>
                 </h6>
@@ -477,6 +516,8 @@ const _album = {
       let parentNode = e.target.parentNode
       let id = parentNode.closest('[data-id]').getAttribute('data-id')
 
+    
+
       if(parentNode.classList.contains('heart')) {
         parentNode.classList.toggle('active')
 
@@ -490,7 +531,6 @@ const _album = {
       }
 
       if(parentNode.classList.contains('music__image')) {
-        // this.displayDialog(id)
         this.displayDialogV2(id)
         this.dialogDiv.classList.add('active')
       }
@@ -546,7 +586,7 @@ const _album = {
       // let 0 - Default 
       // let 1 - Ascending
       // ket 2 - Descending
-      console.log(datas)     
+      // console.log(datas)    
     }
   },
   // this.download(JSON.stringify(tmp_albums), 'json.txt', 'text/json');
