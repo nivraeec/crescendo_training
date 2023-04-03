@@ -2,14 +2,28 @@
     display: flex;
 }
 
-.space__between {
+.wrap {
+    flex-wrap: wrap;
+}
+
+.space__between, 
+.justifyContentSpaceBetween {
     justify-content: space-between;
 }
 
-.space__center {
+.space__center, 
+.justifyContentCenter {
     justify-content: center;
 }
 
-.wrap {
-    flex-wrap: wrap;
+.alignItemsCenter {
+    align-items: center;
+}
+
+.verticalAlignTop{
+    vertical-align: top;
+}
+
+.noTextTransform {
+    text-transform: initial;
 }

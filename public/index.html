@@ -19,6 +19,17 @@
             <div class="navigation__logo">
                 <img src="assets/img/logo.png">
             </div>
+            <div class="search flex alignItemsCenter">
+                <select class="searchDropdown select hide">
+                    <option value="All">All</option>
+                    <option value="Artist">Artist</option>
+                    <option value="Album">Album</option>
+                    <option value="Category">Category</option>
+                    <option value="Price">Price</option>
+                </select>
+                <input class="searchDropdown text" placeholder="Search..." name="query" />
+                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+            </div>
             <div class="navigation__menu">
                 <ul class="navigation__list">
                     <li class="navigation__item">
@@ -106,7 +117,7 @@
                                 <h2>Top Album</h2>
                                 <div class="music__nav flex space__between">
                                     <div class="music__filters flex">
-                                        <div class="music__search">
+                                        <div class="music__search album__search">
                                             Search
                                         </div>
                                         <div class="music__sort album__sort lists">
@@ -177,7 +188,10 @@
     
                         <p class="price">$10.99 USD</p>
                         <div class="dialog__buttons">
-                            <a href="#" class="button heart"><i class="fas fa-heart"></i>Add to Favorites</a>
+                            <a href="#" class="button heart">
+                                <span><i class="fas fa-heart"></i>Add to Favorites</span>
+                                <span><i class="fa-regular fa-heart"></i>Remove from Favorites</span>
+                            </a>
                             <a href="#" target="_blank" class="button visit"><i class="fas fa-globe"></i>Buset iTunes</a>
                         </div>
                     </div>

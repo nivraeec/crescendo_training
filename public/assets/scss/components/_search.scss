@@ -1,0 +1,28 @@
+.search {  
+  .searchDropdown {
+    background: transparent;
+    border: 0;
+
+    &:focus, &:focus-visible {
+      border: 0;
+      outline: 0;
+    }
+
+    &.text {
+      padding: 10px;
+      min-width: 300px;
+    }
+  }
+
+  i {
+    &.fa-magnifying-glass {
+      padding: 15px;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, .04);
+      border-radius: 100px;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

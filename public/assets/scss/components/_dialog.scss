@@ -125,6 +125,10 @@ body {
         max-width: 40%;
     }
 
+    &__sidebar {
+        position: relative;
+    }
+
     &__buttons {
         margin-top: 25px;
         display: flex;

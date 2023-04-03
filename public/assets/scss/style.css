@@ -330,14 +330,25 @@ a {
 .flex {
   display: flex; }
 
-.space__between {
-  justify-content: space-between; }
-
-.space__center {
-  justify-content: center; }
-
 .wrap {
   flex-wrap: wrap; }
+
+.space__between,
+.justifyContentSpaceBetween {
+  justify-content: space-between; }
+
+.space__center,
+.justifyContentCenter {
+  justify-content: center; }
+
+.alignItemsCenter {
+  align-items: center; }
+
+.verticalAlignTop {
+  vertical-align: top; }
+
+.noTextTransform {
+  text-transform: initial; }
 
 @-ms-viewport {
   width: device-width; }
@@ -2491,6 +2502,23 @@ html {
         .navigation__item a:hover::after {
           width: 100%; }
 
+.search .searchDropdown {
+  background: transparent;
+  border: 0; }
+  .search .searchDropdown:focus, .search .searchDropdown:focus-visible {
+    border: 0;
+    outline: 0; }
+  .search .searchDropdown.text {
+    padding: 10px;
+    min-width: 300px; }
+.search i.fa-magnifying-glass {
+  padding: 15px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 100px; }
+.search i:hover {
+  opacity: 0.8; }
+
 .pageTitle {
   background: url("../img/header.png");
   background-size: cover;
@@ -3069,6 +3097,8 @@ body.openDialog {
   margin-right: 20px; }
 .dialog__description {
   max-width: 40%; }
+.dialog__sidebar {
+  position: relative; }
 .dialog__buttons {
   margin-top: 25px;
   display: flex; }
@@ -3088,37 +3118,121 @@ body.openDialog {
   padding-top: 100px; }
   #wufoo-data table {
     width: 100%; }
-    #wufoo-data table tr.admin {
-      background-color: #ffa7a7; }
+    #wufoo-data table tr {
+      cursor: pointer; }
+      #wufoo-data table tr.admin {
+        background-color: #ffa7a7; }
+      #wufoo-data table tr:nth-child(even) {
+        background-color: #f4f4f4; }
     #wufoo-data table td {
       text-align: center;
       padding: 5px; }
       #wufoo-data table td.alignLeft {
         text-align: left; }
+        #wufoo-data table td.alignLeft.topAlign {
+          vertical-align: top; }
+      #wufoo-data table td h5 {
+        margin: 8px 20px; }
 
 #dialog.wufoo-forms.active {
   backdrop-filter: blur(5px); }
 #dialog.wufoo-forms td {
-  text-align: center; }
+  text-align: left; }
 #dialog.wufoo-forms .dialog__content {
   justify-content: space-between; }
   #dialog.wufoo-forms .dialog__content .dialog__description {
     max-width: 100%;
-    overflow-y: scroll;
     height: 85vh; }
     #dialog.wufoo-forms .dialog__content .dialog__description tr:nth-child(even) {
       background-color: rgba(0, 0, 0, 0.37); }
-    #dialog.wufoo-forms .dialog__content .dialog__description .forms td .icon {
-      color: inherit; }
-      #dialog.wufoo-forms .dialog__content .dialog__description .forms td .icon i {
-        padding: 10px;
-        border: 1px solid;
-        border-radius: 40px;
-        height: 40px;
-        width: 40px;
-        display: inline-block;
-        align-items: end;
-        vertical-align: text-bottom; }
+
+.icons.flex .icon:not(:last-child) {
+  margin-right: 5px; }
+
+.icon {
+  color: inherit; }
+  .icon i {
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 40px;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    align-items: end;
+    vertical-align: text-bottom;
+    text-align: center; }
+    .icon i:before {
+      vertical-align: sub; }
+
+.icon-text {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 35px;
+  background-color: #cde3fb;
+  color: #205cad;
+  text-transform: capitalize; }
+  .icon-text:not(:last-child) {
+    margin-right: 10px; }
+  .icon-text.email {
+    background-color: #cef0c7;
+    color: #42ba47; }
+  .icon-text.noTextTransform {
+    text-transform: initial; }
+  .icon-text i {
+    margin-right: 5px; }
+
+.icon-number {
+  border: 1px solid;
+  border-radius: 100px;
+  padding: 20px 10px;
+  height: 60px;
+  width: 60px;
+  line-height: 1.5;
+  text-align: center; }
+
+.form {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.36); }
+  .form .form-header {
+    margin-bottom: 20px; }
+    .form .form-header .headerStatus {
+      position: relative; }
+      .form .form-header .headerStatus .icon-status {
+        position: absolute;
+        top: 3px;
+        right: 3px; }
+        .form .form-header .headerStatus .icon-status.isNot {
+          color: red; }
+    .form .form-header .headerDetails {
+      margin-left: 20px;
+      max-width: 80%; }
+      .form .form-header .headerDetails h3 {
+        margin: 0; }
+  .form .form-content {
+    margin-bottom: 20px; }
+    .form .form-content .description {
+      margin-bottom: 10px; }
+  .form .form-footer a {
+    position: relative;
+    vertical-align: middle; }
+    .form .form-footer a i {
+      font-size: 30px;
+      color: white; }
+
+.entries {
+  max-width: 500px;
+  width: 100vw; }
+
+.noresults {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translate(50%, 50%); }
 
 .user {
   min-width: 400px;
@@ -3142,15 +3256,6 @@ body.openDialog {
       margin-bottom: 10px;
       padding-bottom: 10px;
       border-bottom: 1px solid rgba(128, 128, 128, 0.36); }
-    .user .details .icon {
-      border: 1px solid;
-      padding: 10px;
-      border-radius: 70px;
-      width: 45px;
-      height: 45px;
-      text-align: center; }
-      .user .details .icon i {
-        font-size: 20px; }
     .user .details .label {
       margin-left: 20px; }
       .user .details .label span {

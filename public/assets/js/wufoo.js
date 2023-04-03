@@ -1,19 +1,25 @@
+import helper from "./helper.js";
+
 const _wufoo = {
+  baseURL: 'https://crescendoc.wufoo.com/api/v3', 
   email: 'crescendodevwufoo@gmail.com',
   adminHash: 'O20S-EFSA-ZW5M-EOHJ', // CrescendoDev
+  adminApiKey: 'O20S-EFSA-ZW5M-EOHJ', // CrescendoDev
   adminAccounts: ['crescendoc', 'CrescendoDev', 'Musabbir Khan'], 
-  password: 'WXsN{<3R;rxS',
+  // password: 'WXsN{<3R;rxS', 
   bodyDiv: document.querySelector('body'),
   dataDiv: document.querySelector('#wufoo-data'),
   dialogDiv: document.querySelector('#dialog'),
   dialog:{
     main: document.querySelector('#dialog'),
-    loader: document.querySelector('.dialog__description .loader'),
-    description: document.querySelector(`.dialog__description .forms`),    
+    loader: document.querySelector('.dialog__content .loader'),
+    description: document.querySelector(`.dialog__content .forms`),
+    entries: document.querySelector(`.dialog__content .entries`),
+    noresults: document.querySelector('.noresults'),
   },
   users: [],
   forms:[],
-  entries: [],
+  // entries: [],
   set peste(name) { 
     this.users = name 
     console.log(this.users)
@@ -22,31 +28,96 @@ const _wufoo = {
   init() {
     if(this.dataDiv === null) return
 
+    // return
     // setting property
     Object.defineProperty(this, "setAllUsers", {
       set : (value) => {
           this.users = value;
-          console.log('Set Users', this.users)
+          // console.log('Set Users', this.users)
       }
     });
 
     // getting property
     Object.defineProperty(this, "getAllUsers", {
       get : () => {
-          console.log('Get Users')
           return this.users;
       }
     });
 
-    this.getUsers()
+    // this.getUsers()
+    this
+    .fetchData(this.adminApiKey, this.password, '/users', '')
+    .then(result => { 
+      let { Users } = result
+        let html = ''
+        let count = 0;
+
+        html = `<table>`
+        html += `<tr>
+                    <th class="field-Hash"></th>
+                    <th class="field-User"></th>
+                    <th class="field-Email"></th>
+                    <th class="field-Company"></th>
+                 </tr>`
+        Users.forEach((user, i) => {
+          let Hash = user.Hash
+          this.users[Hash] = user
+
+          count = helper.textToCount(i)
+          
+          // if( !this.adminAccounts.includes(user.User) ) {
+            html += `<tr data-hash="${user.Hash}" data-apikey="${user.ApiKey}">
+                <td class=""><img src="${user.ImageUrlSmall}" alt="${user.Image}" /></td>
+                <td class="alignLeft">
+                  <h5><small>${'Email'.toUpperCase()}</small><br/>${user.Email}</h5>
+                  <h5><small>${'Company'.toUpperCase()}</small><br/>${(user.Company ? user.Company.toUpperCase() : user.Email.split('@')[1].split('.')[0].toLowerCase())}</h5>
+                </td>
+                <td class="alignLeft">
+                  <h5><small>${'APi-Key'.toUpperCase()}</small><br/>${user.ApiKey}</h5>
+                  <h5><small>${'Hash'.toUpperCase()}</small><br/>${(user.Hash)}</h5>
+                </td>
+                <td class="alignLeft topAlign">
+                  <h5>
+                    <small>${'Permission'.toUpperCase()}</small><br />
+                    <div class="icons flex">
+                      <div class="icon">
+                      ${(user.CreateForms === "1") ? '<i class="fa-sharp fa-solid fa-y"></i>' : '<i class="fa-sharp fa-solid fa-n"></i>'}
+                    </div>
+                    <div class="icon">
+                      ${(user.CreateReports === "1") ? '<i class="fa-sharp fa-solid fa-y"></i>' : '<i class="fa-sharp fa-solid fa-n"></i>'}
+                    </div>
+                    <div class="icon">
+                      ${(user.CreateThemes === "1") ? '<i class="fa-sharp fa-solid fa-y"></i>' : '<i class="fa-sharp fa-solid fa-n"></i>'}
+                    </div>
+                    </div>                  
+                  </h5>
+                </td>             
+              </tr>`
+          // } 
+        });
+        html += `</table>`
+        this.dataDiv.innerHTML = html
+     })
+    .catch(error => { console.log(error) })
+    
+    
     this.getActions(this.users)
 
   }, 
-  stringToEncode(username, password) {
-    return btoa(username+':'+password)
-  },
-  textToCount(i) {
-    return (i >= 9) ? (i < 99) ? `0${i+1}` : i + 1 : `00${i+1}`
+  async fetchData(apikey, password, req, identifier=false) {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Basic "+helper.stringToEncode(apikey, password));
+    myHeaders.append("Cookie", "ep202=ASDqAkF48ZhjdpCpJJpJaPMBnNI=");
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    return await fetch(`${this.baseURL}${req}${identifier}.json`, requestOptions)
+      .then(response => response.json())
+      .catch(error => { return error })
   },
   async getUsers() {
     var myHeaders = new Headers();
@@ -68,42 +139,48 @@ const _wufoo = {
 
         html = `<table>`
         html += `<tr>
-                    <th class="field-Hash">No.</th>
-                    <th class="field-User">User</th>
-                    <th class="field-Email">Email</th>
-                    <th class="field-Company">Company</th>
-                    <!--th class="field-ApiKey">API Key</th-->
-                    <th class="field-CreateForms">Forms</th>
-                    <th class="field-CreateReports">Reports</th>
-                    <th class="field-CreateThemes">Themes</th>
+                    <th class="field-Hash"></th>
+                    <th class="field-User"></th>
+                    <th class="field-Email"></th>
+                    <th class="field-Company"></th>
                  </tr>`
         Users.forEach((user, i) => {
           let Hash = user.Hash
           this.users[Hash] = user
 
-          // count = (i >= 9) ? i + 1 : `0${i+1}`
-          count = this.textToCount(i)
+          count = helper.textToCount(i)
           
-          if( !this.adminAccounts.includes(user.User) ) {
-            
-            html += `<tr data-hash="${user.Hash}" data-apikey="${user.ApiKey}">`
-              html += `<td class="">${count}</td>`
-              html += `<td class="alignLeft">${user.User}</td>`
-              html += `<td class="">${user.Email}</td>`
-              html += `<td>${(user.Company ? user.Company.toUpperCase() : user.Email.split('@')[1].split('.')[0].toLowerCase())}</td>`
-              html += `<!--td>${user.ApiKey}</td-->`
-              html += `<td>${(user.CreateForms === "1" ? 'Yes' : 'No')}</td>`
-              html += `<td>${(user.CreateReports === "1" ? 'Yes' : 'No')}</td>`
-              html += `<td>${(user.CreateThemes === "1" ? 'Yes' : 'No')}</td>`
-            html += `</tr>`
+          //if( !this.adminAccounts.includes(user.User) ) {
+            // console.log(user)
 
-            // this.getForms(user.ApiKey)
-          } else {
-            html += `<tr class="admin" data-hash="${user.Hash}" data-apikey="${user.ApiKey}">`
-              html += `<td>${count}</td>`           
-              html += `<td colspan="6">${user.User}</td>`              
-            html += `</tr>`
-          }
+            html += `<tr data-hash="${user.Hash}" data-apikey="${user.ApiKey}">
+                <td class=""><img src="${user.ImageUrlSmall}" alt="${user.Image}" /></td>
+                <td class="alignLeft">
+                  <h5><small>${'Email'.toUpperCase()}</small><br/>${user.Email}</h5>
+                  <h5><small>${'Company'.toUpperCase()}</small><br/>${(user.Company ? user.Company.toUpperCase() : user.Email.split('@')[1].split('.')[0].toLowerCase())}</h5>
+                </td>
+                <td class="alignLeft">
+                  <h5><small>${'APi-Key'.toUpperCase()}</small><br/>${user.ApiKey}</h5>
+                  <h5><small>${'Hash'.toUpperCase()}</small><br/>${(user.Hash)}</h5>
+                </td>
+                <td class="alignLeft topAlign">
+                  <h5>
+                    <small>${'Permission'.toUpperCase()}</small><br />
+                    <div class="icons flex">
+                      <div class="icon">
+                      ${(user.CreateForms === "1") ? '<i class="fa-sharp fa-solid fa-y"></i>' : '<i class="fa-sharp fa-solid fa-n"></i>'}
+                    </div>
+                    <div class="icon">
+                      ${(user.CreateReports === "1") ? '<i class="fa-sharp fa-solid fa-y"></i>' : '<i class="fa-sharp fa-solid fa-n"></i>'}
+                    </div>
+                    <div class="icon">
+                      ${(user.CreateThemes === "1") ? '<i class="fa-sharp fa-solid fa-y"></i>' : '<i class="fa-sharp fa-solid fa-n"></i>'}
+                    </div>
+                    </div>                  
+                  </h5>
+                </td>             
+              </tr>`
+           // } 
         });
         html += `</table>`
         this.dataDiv.innerHTML = html
@@ -115,9 +192,9 @@ const _wufoo = {
 
     var myHeaders = new Headers();
     if(ApiKey) {
-      myHeaders.append("Authorization", "Basic "+this.stringToEncode(ApiKey, this.password));
+      myHeaders.append("Authorization", "Basic "+helper.stringToEncode(ApiKey, this.password));
     } else {
-      myHeaders.append("Authorization", "Basic "+this.stringToEncode(this.adminHash, this.password));
+      myHeaders.append("Authorization", "Basic "+helper.stringToEncode(this.adminHash, this.password));
     }
     
     myHeaders.append("Cookie", "ep202=ASDqAkF48ZhjdpCpJJpJaPMBnNI=");
@@ -135,61 +212,56 @@ const _wufoo = {
         let html = ''
         let count = 0
 
-        html = `<table>`
-          html += `<tr>`
-            html += `<th><p>No.</p></th>`
-            html += `<th><p>Name</p></th>`
-            html += `<th><p>Hash</p></th>`
-            html += `<th><p>Email</p></th>`
-            html += `<th><p>IsPublic</p></th>`
-          html += `</tr>`
-        
         let haveEmails = 0
 
         Forms.forEach((form, i) => {
           let isTrue = i < 1000 ? true : false;
           let emails = form.Email.split(', ').filter(i=>i)
-          count = this.textToCount(i)
+          count = helper.textToCount(i)
 
           if(isTrue)  {
-            
-            // console.log(`${form.Hash} - ${emails}`)
-            // html += `<tr data-email="${emails.length}">`
-            //   html += `<td class="alignLeft"><p>${count}</p></td>`
-            //   html += `<td class="alignLeft"><p>${form.Name}</p></td>`
-            //   html += `<td>${form.Hash}</td>`
-            //   html += `<td>`
-              
-            //   if(emails.length) {
-            //     haveEmails++
-            //     emails.forEach((mail, i) => {
-            //       html += `<a class="icon" href="mailto:${mail}"><i class="fa-sharp fa-solid fa-envelope"></i></a>`
-            //     })
-            //   } else {
-            //     html += `<a class="icon" href="#" style="color:red"><i class="fa-sharp fa-solid fa-mailbox-flag-up">N</i></a>`
-            //   }
-                 
-              
-            //   html += `</td>`
-            //   html += `<td>${(form.IsPublic === "1") ? "Yes" : "No"}</td>`
-            // html += `</tr>`
-
-            html += `<div class="form">
-                      <div class="icon">
-                        <i class="fa-solid fa-table-list"></i>
-                      </div>
-                      <div class="details">
-                        <h5>${form.Name}</h5>
-                        <p>${(form.Description) ? '<i class="fa-sharp fa-solid fa-message fa-message-lines"></i>' : '<i class="fa-sharp fa-solid fa-message-slash"></i>'}</p>
-                        <p>${form.RedirectMessage}</p>
-                        <small>${form.Url}</small>
-                      </div>
-                    </div>`
-
+            html += `<div class="form" data-hash="${form.Hash}">
+              <div class="form-header flex justifyContentSpaceBetween">
+                <div class="flex alignItemsCenter">
+                  <div class="headerStatus">
+                    <div class="icon-number">${count}</div>
+                    <div class="icon-status ${(form.IsPublic === '1')?'isPublic':'isNot'} ">
+                      ${(form.IsPublic === "1") ? `` : `<i class="fa-sharp fa-solid fa-circle"></i>`}
+                    </div>
+                  </div>
+                  <div class="headerDetails">
+                    <h3>${form.Name.toUpperCase()}</h3>
+                    <small>${form.Hash}</small>
+                  </div>
+                </div>
+                <div class="dateCreated">
+                  <small>${helper.dateToMoment(form.DateCreated)}</small>
+                </div>                
+              </div>
+              <div class="form-content">`
+            html += (form.Description) ? `<div class="description">
+                  <small>Description</small><br/>
+                  ${!form.Description?'':helper.stringToHTMLv2(form.Description)}
+                </div>` : ``   
+            html += `<div class="redirectMessage">
+                  <small>Redirect Message</small><br/>
+                  ${!form.RedirectMessage?'':helper.stringToHTMLv2(form.RedirectMessage)}
+                </div>
+              </div>
+              <div class="form-footer flex justifyContentSpaceBetween">
+                <div class="left flex">
+                  <div class="icon-text language"><i class="fa-solid fa-globe"></i>${form.Language}</div>`
+            html += (emails.length) ? `<div class="icon-text email noTextTransform"><i class="fa-solid fa-envelope"></i>Email (x${+emails.length})</div>` : ''
+            html += `</div>
+                <div class="right flex">
+                  <div class="icon-text expand"><i class="fa-sharp fa-solid fa-expand"></i>Expand</div>
+                </div>
+              </div>
+            </div>`
           }
         });
 
-        console.log('haveEmails', haveEmails)
+        // console.log('haveEmails', haveEmails)
 
         html += `</table>`
 
@@ -198,12 +270,33 @@ const _wufoo = {
       })
       .catch(error => console.log('error', error));  
   }, 
+  async getFormsFields(Apikey, Hash) {
+    this
+    .fetchData(Apikey, this.password, '/forms', `/${Hash}/fields`)
+    .then(result => {
+      let {Fields} = result
+      let html = ''
+      if(Fields === undefined) return false
+      
+      Fields.forEach((field, i) => {
+        console.log(field)
+        html += `<div>
+        <h3>${field.Title} • ${field.Type}</h3>
+        <small>${field.Instructions}</small>
+        </div>`
+      })
+
+      this.dialog.entries.innerHTML = html
+      this.dialog.noresults.classList.add('hide')
+    })
+    .catch(error => { console.log(error) })
+  },
   async getFormsEntries(ApiKey=false, Hash) {
     var myHeaders = new Headers();
     if(ApiKey) {
-      myHeaders.append("Authorization", "Basic "+this.stringToEncode(ApiKey, this.password));
+      myHeaders.append("Authorization", "Basic "+helper.stringToEncode(ApiKey, this.password));
     } else {
-      myHeaders.append("Authorization", "Basic "+this.stringToEncode(this.adminHash, this.password));
+      myHeaders.append("Authorization", "Basic "+helper.stringToEncode(this.adminHash, this.password));
     }
     
     myHeaders.append("Cookie", "ep202=ASDqAkF48ZhjdpCpJJpJaPMBnNI=");
@@ -214,20 +307,25 @@ const _wufoo = {
       redirect: 'follow'
     };
 
-    await fetch(`https://crescendoc.wufoo.com/api/v3/forms/${Hash}/entries/count.json`, requestOptions)
+    await fetch(`https://crescendoc.wufoo.com/api/v3/forms/${Hash}/entries.json`, requestOptions)
       .then(response => response.json())
       .then(result => {
-        // let { Forms } = result
-        console.log(result)
+        let { Entries } = result
         let html = ''
+        Entries.forEach(entry => {
+          console.log(entry)
+          // html +=`<div>${entry}</div>`
+        });
+        // this.dialog.entries.innerHTML += html
       })
       .catch(error => console.log('error', error));  
   },
   async getActions(data) {
-    const apikey = this.dataDiv
-    apikey.onclick = e => {
-      let hash = e.target.parentNode.getAttribute('data-hash')
-      let apikey = e.target.parentNode.getAttribute('data-apikey')
+
+    this.dataDiv.onclick = e => {
+      let hash = e.target.closest('[data-hash]').getAttribute('data-hash')
+      let apikey = e.target.closest('[data-apikey]').getAttribute('data-apikey')
+      
       if(hash != null) {
         this.dialogDiv.classList.add('active')
         this.bodyDiv.classList.add('openDialog')
@@ -238,18 +336,44 @@ const _wufoo = {
     
     this.dialogDiv.onclick = e => {
       let parent = e.target.parentNode
-      console.log(e)
+      // console.log(e)
       if(parent.classList.contains('close')) {
         this.dialogDiv.classList.remove('active')
         this.bodyDiv.classList.remove('openDialog')
         this.dialog.loader.classList.toggle('hide')
+        this.dialog.noresults.classList.remove('hide')
+        this.dialog.entries.innerHTML = ''
+      }
+    }
+
+    this.dialog.description.onclick = e => {
+      if(e.target.classList.contains('expand')) {
+        let hash = e.target.closest('[data-hash]').getAttribute('data-hash')
+        let apikey = document.querySelector('.dialog__image [data-apikey]').getAttribute('data-apikey')
+        this.getFormsFields(apikey, hash)
       }
     }
   },
+  displayUsers(user) {
+    let html = `<div class="user" data-hash="${user.Hash}" data-apikey="${user.ApiKey}">
+      <div class="user-header">
+        <div class="left flex">
+          <div class="userImage"><img src="${user.ImageUrlSmall}" alt="${user.Image}" /></div>
+          <div class="userData">
+            <h3>${user.Email}</h3>
+            <small>${user.Hash} • ${user.ApiKey}</small>
+          </div>
+        </div>
+        <div class="right"></div>
+      </div>
+      <div class=""></div>
+    </div>`
+    this.dataDiv.innerHTML += html
+  },
   displayDialog(data) {
-    console.log('data',data.User)
+    // console.log('data',data.User)
     let html = ''  
-      html = `<div class="user">
+      html = `<div class="user" data-apikey="${data.ApiKey}">
         <div class="profile">
           <div class="photo"><img src="${data.ImageUrlBig}" alt="${data.Image}" /></div>
           <p>${data.Email}</p>
